@@ -9,7 +9,7 @@ module.exports = merge(common,{
             filename: 'index.html',
             chunks: ["vendor","index", "css", "ts","commons"],
             template: './src/index.html',
-            inject: 'head',
+            inject: 'body',
             title: '测试',
             hash: true
         }),

@@ -10,8 +10,6 @@ module.exports = {
             'vue'
         ],
         index: './src/index.js',
-        ts: './src/greeter.ts',
-        css: './src/css.js'
     },
     output: {
         filename: '[name].[chunkhash].js',
