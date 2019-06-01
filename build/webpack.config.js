@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanCSSPlugin = require('less-plugin-clean-css');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
@@ -36,13 +35,6 @@ module.exports = {
         }
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            chunks: ["vendor","index", "css", "ts","commons"],
-            template: './src/index.html',
-            inject: true,
-            title: '测试',
-        }),
         new ManifestPlugin({
             fileName: 'manifest.json',
             basePath: '',
