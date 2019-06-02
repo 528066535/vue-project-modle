@@ -1,6 +1,8 @@
 import VueRouter from 'vue-router'
 import Vue from 'vue'
+
 Vue.use(VueRouter);
+
 let router = null;
 
 // 1. 定义 (路由) 组件。
