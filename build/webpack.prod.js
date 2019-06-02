@@ -16,13 +16,13 @@ module.exports = merge(common, {
     plugins: [
         new ExtractTextPlugin({
             filename:  (getPath) => {
-                return getPath('[name].css');
+                return getPath('[name].[chunkhash].css');
             },
             allChunks: false
         })
     ],
     optimization: {
-        minimize: true //uglify js
+        // minimize: true //uglify js
     },
 
     mode: 'production',

@@ -1,7 +1,7 @@
 let menu = [];
 menu = menu.concat([
     {
-        path: '/error',
+        path: '/*',
         name: '404',
         component:  () => import(/* webpackChunkName: "pages/error/vue/error" */'@Pages/error/vue/error'),
 
