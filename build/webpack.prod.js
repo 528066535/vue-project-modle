@@ -1,19 +1,77 @@
+const path = require('path');
 const merge = require('webpack-merge');
 const common = require('./webpack.config.js');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const CleanCSSPlugin = require('less-plugin-clean-css');
 
-module.exports = merge(common,{
-    plugins: [
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            chunks: ["vendor","index", "css", "ts","commons"],
-            template: './src/index.html',
-            inject: 'body',
-            title: '测试',
-            hash: true
-        }),
-    ],
+module.exports = merge(common, {
     devtool: 'source-map',
-    mode: 'production'
+    output: {
+        filename: '[name].[chunkhash].js',
+        path: path.resolve(__dirname, '../dist'),
+        chunkFilename: '[name].[chunkhash].js',
+        publicPath: '/'
+    },
+    plugins: [
+        new ExtractTextPlugin({
+            filename:  (getPath) => {
+                return getPath('[name].css');
+            },
+            allChunks: false
+        })
+    ],
+    optimization: {
+        minimize: true //uglify js
+    },
+
+    mode: 'production',
+
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                exclude: /node_modules/,
+                include: path.resolve(__dirname, "../src"),
+                use: ExtractTextPlugin.extract({
+                    use: [
+                        'style-loader',
+                        'css-loader',
+                        {
+                            loader: "postcss-loader",
+                            options: {
+                                config: {
+                                    path: path.resolve(__dirname, 'postcss.config.js')
+                                }
+                            }
+                        }
+                    ]
+                })
+            },
+            {
+                test: /\.less$/,
+                exclude: /node_modules/,
+                include: path.resolve(__dirname, "../src"),
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [
+                        'css-loader',
+                        {
+                            loader: "postcss-loader",
+                            options: {
+                                config: {
+                                    path: path.resolve(__dirname, 'postcss.config.js')
+                                }
+                            }
+                        },
+                        {
+                            loader: 'less-loader',
+                            options: {lessPlugins: [new CleanCSSPlugin({advanced: true})]}
+                        }
+                    ]
+                })
+            }
+        ]
+
+    }
 });

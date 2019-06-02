@@ -1,15 +1,17 @@
 const path = require('path');
 const webpack = require('webpack');
-const CleanCSSPlugin = require('less-plugin-clean-css');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
     entry: {
         vendor: [
             'vue'
         ],
-        index: './src/index.js',
+        index: './src/main.js',
+        css: './src/resource/css/index.js'
     },
     output: {
         filename: '[name].[chunkhash].js',
@@ -33,6 +35,15 @@ module.exports = {
         }
     },
     plugins: [
+        new VueLoaderPlugin(),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            chunks: ["vendor","index","commons","css"],
+            template: './src/index.html',
+            inject: 'body',
+            title: '测试',
+            hash: false
+        }),
         new ManifestPlugin({
             fileName: 'manifest.json',
             basePath: '',
@@ -44,12 +55,28 @@ module.exports = {
     resolve: {
         extensions: [ '.js', '.vue', '.jsx', 'less'], //后缀名自动补全
         alias: {
+            '@': path.resolve(__dirname, "../src"),
+            '@Components': path.resolve(__dirname, "../src/resource/core/components"),
+            '@Pages': path.resolve(__dirname, "../src/pages"),
+            '@Core': path.resolve(__dirname, "../src/resource/core"),
+            '@Router': path.resolve(__dirname, "../src/resource/core/router"),
             'vue': 'vue/dist/vue.common.js',
         }
     },
 
     module: {
         rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+                exclude: /node_modules/,
+                options: {
+                    loaders: {
+                        less: 'vue-style-loader!css-loader!less-loader'
+                    },
+                    esModule: false
+                }
+            },
             {
                 test: /\.tsx?$/,
                 loader: 'ts-loader',
@@ -58,46 +85,6 @@ module.exports = {
                 options: {
                     appendTsSuffixTo: [/\.vue$/],
                 }
-            },
-            {
-                test: /\.css$/,
-                exclude: /node_modules/,
-                include: path.resolve(__dirname, "../src"),
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    {
-                        loader: "postcss-loader",
-                        options: {
-                            sourceMap: true,
-                            config: {
-                                path: path.resolve(__dirname, 'postcss.config.js')
-                            }
-                        }
-                    }
-                ]
-            },
-            {
-                test: /\.less$/,
-                exclude: /node_modules/,
-                include: path.resolve(__dirname, "../src"),
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    {
-                        loader: "postcss-loader",
-                        options: {
-                            sourceMap: true,
-                            config: {
-                                path: path.resolve(__dirname, 'postcss.config.js')
-                            }
-                        }
-                    },
-                    {
-                        loader: 'less-loader',
-                        options: {lessPlugins: [new CleanCSSPlugin({advanced: true})]}
-                    }
-                ]
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -126,6 +113,13 @@ module.exports = {
                     }
                 ]
             },
+            {
+                test: /\.js$/,
+                use: 'babel-loader?cacheDirectory', // 缓存loader执行结果 发现打包速度已经明显提升了
+                exclude: /node_modules/,
+                include: path.resolve(__dirname, 'src')
+            }
+
         ]
     }
 };
