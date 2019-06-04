@@ -1,5 +1,5 @@
 import VueRouter from 'vue-router'
-import Vue from 'vue'
+import Data from '@Core/data'
 
 Vue.use(VueRouter);
 
@@ -30,21 +30,24 @@ export default {
     /**
      * 初始化路由
      */
-    init(el, routers){
+    init(el, routers, store, Core){
         router = new VueRouter({routes: routers});
 
         router.beforeEach((to, from, next) => {
-            if(to.path.indexOf('/dashboard') >= 0 || !to.name){
-
-            }else{
+            if(to.meta.auto && !Data.getToken()) {
+                next({path: '/login'});
+            }
+            if(to.name) {
                 document.title = to.name;
             }
             next();
         });
 
         new Vue({
+            Core,
             el: el,
-            router: router
+            router: router,
+            store
         });
     },
 }

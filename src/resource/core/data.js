@@ -10,12 +10,36 @@ let get = (key) => {
     var key = getKey(key);
     let result = localStorage.getItem(key);
     var data = result?JSON.parse(uncompile(result)):null;
-    return data;
+    return data?data:null;
 };
 
 let remove = (key) => {
     var key = getKey(key);
     return localStorage.removeItem(key);
+};
+
+let getUser = () => {
+    return get(Config.DATA.USER);
+};
+
+let setUser = (item) => {
+    return set(Config.DATA.USER,item);
+};
+
+let removeUser = () => {
+    remove(Config.DATA.USER);
+};
+
+let getToken = () => {
+    return get(Config.DATA.TOKEN);
+};
+
+let setToken = (item) => {
+    return set(Config.DATA.TOKEN,item);
+};
+
+let removeToken = () => {
+    remove(Config.DATA.TOKEN);
 };
 
 function getKey(code) {
@@ -45,4 +69,10 @@ function uncompile(str){
 export default {
     compile,
     uncompile,
+    getUser,
+    setUser,
+    removeUser,
+    getToken,
+    setToken,
+    removeToken,
 }
