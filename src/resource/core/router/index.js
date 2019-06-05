@@ -1,5 +1,6 @@
 import VueRouter from 'vue-router'
 import Data from '@Core/data'
+import Core from '@Core'
 
 Vue.use(VueRouter);
 
@@ -30,7 +31,7 @@ export default {
     /**
      * 初始化路由
      */
-    init(el, routers, store, Core){
+    init(el, routers, store){
         router = new VueRouter({routes: routers});
 
         router.beforeEach((to, from, next) => {
