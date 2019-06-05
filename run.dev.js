@@ -21,6 +21,18 @@ app.use(proxy('/api', {
     xfwd: true,
     changeOrigin: false,
     rewrite: path => {
+        console.log(path);
+        return path.replace('/api/', '/');
+    },
+    logs: false
+}));
+
+app.use(proxy('*', {
+    target: CONFIG.API_URL,
+    xfwd: true,
+    changeOrigin: false,
+    rewrite: path => {
+        console.log(path);
         return path.replace('/api/', '/');
     },
     logs: false

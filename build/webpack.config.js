@@ -10,8 +10,7 @@ module.exports = {
         vendor: [
             'vue'
         ],
-        // core: './src/resource/core/index.js',
-        index: './src/main.js',
+        index: './src/enter-client.js',
         css: './src/resource/css/index.js'
     },
     output: {
@@ -40,7 +39,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             chunks: ["vendor","index","commons","css"],
-            template: './src/index.html',
+            template: './src/resource/template/index.html',
             inject: 'body',
             title: '测试',
             hash: false
@@ -61,10 +60,9 @@ module.exports = {
         extensions: [ '.js', '.vue', '.jsx', 'less'], //后缀名自动补全
         alias: {
             '@': path.resolve(__dirname, "../src"),
-            '@Components': path.resolve(__dirname, "../src/resource/core/components"),
             '@Pages': path.resolve(__dirname, "../src/pages"),
-            '@Router': path.resolve(__dirname, "../src/resource/core/router"),
             '@Core': path.resolve(__dirname, "../src/resource/core"),
+            '@Pub': path.resolve(__dirname, "../src/resource/pub"),
             'vue': 'vue/dist/vue.common.js',
         }
     },

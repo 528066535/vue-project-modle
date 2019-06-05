@@ -1,6 +1,5 @@
 import VueRouter from 'vue-router'
 import Data from '@Core/data'
-import Core from '@Core'
 
 Vue.use(VueRouter);
 
@@ -31,8 +30,8 @@ export default {
     /**
      * 初始化路由
      */
-    init(el, routers, store){
-        router = new VueRouter({routes: routers});
+    init(routers, mode='hash'){
+        router = new VueRouter({mode: mode,routes: routers});
 
         router.beforeEach((to, from, next) => {
             if(to.meta.auto && !Data.getToken()) {
@@ -44,11 +43,6 @@ export default {
             next();
         });
 
-        new Vue({
-            Core,
-            el: el,
-            router: router,
-            store
-        });
+        return router;
     },
 }

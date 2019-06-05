@@ -10,9 +10,9 @@ const koaEjs = require('koa-ejs');
 
 const app = new koa();
 
-//静态目录
+//静态目录过期时间
 let originalServe = koaStatic(path.join(__dirname, '/dist'), {
-    maxage: 31536000000 //1年
+    maxage: 30 * 24 * 60 * 60 * 1000
 });
 let modifiedServe = function(ctx, next) {
     ctx.path = ctx.path.replace('/dist', '/');
