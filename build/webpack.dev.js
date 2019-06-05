@@ -38,10 +38,10 @@ module.exports = merge(common,{
             },
             {
                 test: /\.less$/,
-                exclude: /node_modules/,
-                include: path.resolve(__dirname, "../src"),
+                exclude: /node_modules|bootstrap/,
                 use: [
-                    'css-loader',
+                    'style-loader',
+                    { loader: 'css-loader', options: { importLoaders: 1 } },
                     {
                         loader: "postcss-loader",
                         options: {
@@ -53,7 +53,7 @@ module.exports = merge(common,{
                     },
                     {
                         loader: 'less-loader',
-                        options: {lessPlugins: [new CleanCSSPlugin({advanced: true})]}
+                        options: { lessPlugins: [ new CleanCSSPlugin({ advanced: true }) ] }
                     }
                 ]
             }

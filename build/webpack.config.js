@@ -10,6 +10,7 @@ module.exports = {
         vendor: [
             'vue'
         ],
+        // core: './src/resource/core/index.js',
         index: './src/main.js',
         css: './src/resource/css/index.js'
     },
@@ -49,7 +50,11 @@ module.exports = {
             basePath: '',
             publicPath: '/dist/'
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new webpack.ProvidePlugin({
+            Vue: 'vue',
+            Core: '@Core/index.js'
+        })
     ],
 
     resolve: {
@@ -58,8 +63,8 @@ module.exports = {
             '@': path.resolve(__dirname, "../src"),
             '@Components': path.resolve(__dirname, "../src/resource/core/components"),
             '@Pages': path.resolve(__dirname, "../src/pages"),
-            '@Core': path.resolve(__dirname, "../src/resource/core"),
             '@Router': path.resolve(__dirname, "../src/resource/core/router"),
+            '@Core': path.resolve(__dirname, "../src/resource/core"),
             'vue': 'vue/dist/vue.common.js',
         }
     },

@@ -51,4 +51,4 @@ app.use(async (ctx)=>{
     await ctx.render('dist/index');
 });
 
-app.listen(CONFIG.PORT);
+app.listen(CONFIG.DISPORT);
