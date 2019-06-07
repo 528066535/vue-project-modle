@@ -1,21 +1,15 @@
-const path = require('path');
 const merge = require('webpack-merge');
-const common = require('./webpack.config.js');
-const webpack = require('webpack');
+const baseConfig = require('./webpack.config.js')
+const VueSSRServerPlugin = require("vue-server-renderer/server-plugin");
+const nodeExternals = require('webpack-node-externals');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanCSSPlugin = require('less-plugin-clean-css');
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = merge(common, {
-    devtool: 'source-map',
+module.exports =  merge(baseConfig,{
     entry: {
-        index: './src/enter-client.js',
-    },
-    output: {
-        filename: '[name].[chunkhash].js',
-        path: path.resolve(__dirname, '../dist'),
-        chunkFilename: '[name].[chunkhash].js',
-        publicPath: '/'
+        index: './src/enter-server.js',
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -31,13 +25,26 @@ module.exports = merge(common, {
                 return getPath('[name].[chunkhash].css');
             },
             allChunks: false
-        })
+        }),
+        new VueSSRServerPlugin()
     ],
-    optimization: {
-        // minimize: true //uglify js
-    },
+
+    externals: nodeExternals({
+        // 不要外置化 webpack 需要处理的依赖模块。
+        // 你可以在这里添加更多的文件类型。例如，未处理 *.vue 原始文件，
+        // 你还应该将修改 `global`（例如 polyfill）的依赖模块列入白名单
+        whitelist: /\.css$/
+    }),
 
     mode: 'production',
+
+    // 此处告知 server bundle 使用 Node 风格导出模块(Node-style exports)
+    output: {
+        libraryTarget: 'commonjs2'
+    },
+
+    target: 'node',
+    node: undefined,
 
     module: {
         rules: [
@@ -84,6 +91,5 @@ module.exports = merge(common, {
                 })
             }
         ]
-
     }
 });

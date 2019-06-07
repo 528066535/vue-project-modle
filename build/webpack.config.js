@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
@@ -10,7 +9,6 @@ module.exports = {
         vendor: [
             'vue'
         ],
-        index: './src/enter-client.js',
         css: './src/resource/css/index.js'
     },
     output: {
@@ -35,21 +33,13 @@ module.exports = {
         }
     },
     plugins: [
+        new CleanWebpackPlugin(),
         new VueLoaderPlugin(),
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            chunks: ["vendor","index","commons","css"],
-            template: './src/resource/template/index.html',
-            inject: 'body',
-            title: '测试',
-            hash: false
-        }),
         new ManifestPlugin({
             fileName: 'manifest.json',
             basePath: '',
             publicPath: '/dist/'
         }),
-        new CleanWebpackPlugin(),
         new webpack.ProvidePlugin({
             Vue: 'vue',
             Core: '@Core/index.js'
