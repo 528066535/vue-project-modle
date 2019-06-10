@@ -1,6 +1,6 @@
 <template>
     <div>
-        test
+        test-sx
     </div>
 </template>
 <script>
