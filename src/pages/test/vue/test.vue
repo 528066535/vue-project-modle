@@ -1,6 +1,6 @@
 <template>
     <div>
-        test
+        test-1
     </div>
 </template>
 <script>
@@ -16,7 +16,6 @@
         mounted() {
 
         },
-        components: {},
         methods: {
 
         },
