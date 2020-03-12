@@ -26,15 +26,15 @@ koaEjs(app, {
     debug: true
 });
 
-app.use(proxy('/api', {
-    target: CONFIG.API_URL,
-    xfwd: true,
-    changeOrigin: false,
-    rewrite: path => {
-        return path.replace('/api/', '/');
-    },
-    logs: true
-}));
+// app.use(proxy('/api', {
+//     target: CONFIG.API_URL,
+//     xfwd: true,
+//     changeOrigin: false,
+//     rewrite: path => {
+//         return path.replace('/api/', '/');
+//     },
+//     logs: true
+// }));
 
 app.use(async (ctx)=>{
     await ctx.render('dist/index');
