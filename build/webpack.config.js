@@ -8,7 +8,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 module.exports = {
     entry: {
         vendor: [
-            'vue'
+            'vue','jquery'
         ],
         index: './src/enter-client.js',
         css: './src/resource/css/index.js'
@@ -52,7 +52,9 @@ module.exports = {
         new CleanWebpackPlugin(),
         new webpack.ProvidePlugin({
             Vue: 'vue',
-            Core: '@Core/index.js'
+            Core: '@Core/index.js',
+            $: "jquery",
+            jQuery: "jquery"
         })
     ],
 
@@ -61,9 +63,12 @@ module.exports = {
         alias: {
             '@': path.resolve(__dirname, "../src"),
             '@Pages': path.resolve(__dirname, "../src/pages"),
+            '@Resource': path.resolve(__dirname, "../src/resource"),
             '@Core': path.resolve(__dirname, "../src/resource/core"),
             '@Pub': path.resolve(__dirname, "../src/resource/pub"),
             'vue': 'vue/dist/vue.common.js',
+            'jquery':'jquery',
+            '$':'jquery'
         }
     },
 
@@ -121,8 +126,19 @@ module.exports = {
                 use: 'babel-loader?cacheDirectory', // 缓存loader执行结果 发现打包速度已经明显提升了
                 exclude: /node_modules/,
                 include: path.resolve(__dirname, 'src')
-            }
-
+            },
+            {
+                test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+                loader: 'file-loader'
+            },
+            {
+                test: /\.css$/,
+                use: [ 'style-loader', 'css-loader' ]
+            },
+            {
+                test: /\.(less)$/,
+                exclude: /node_modules/
+            },
         ]
     }
 };

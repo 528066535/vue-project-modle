@@ -5,11 +5,14 @@ let DATA = {
     TOKEN: 'token',
 };
 
+let PROXY_URL = '/luke';
+
 let NORMAL = {
 
 };
 
 export default {
     DATA,
-    NORMAL
+    NORMAL,
+    PROXY_URL
 }

@@ -1,0 +1,86 @@
+@import "../trans";
+//message 消息提示
+.el-message{
+  padding: 7px 7px 7px 15px;
+  min-width: 300px;
+  max-width: 600px;
+  box-shadow: 0 0 16px rgba(0,0,0,0.12);
+  border-radius: 4px;
+
+  .el-message__content{
+    color: #fff;
+    .box-flex(1);
+    line-height: 20px;
+  }
+
+  &.is-closable{
+    .el-message__content{
+
+      padding-right: 26px;
+    }
+  }
+
+  .el-icon-close{
+    display: block;
+    width: 14px;
+    height: 14px;
+    background: data-uri('../../image/icon-tip-close.png') center no-repeat;
+    &:before{display: none;}
+  }
+
+  .el-message__icon{
+    &:before{display: none;}
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &.el-message--success{
+    background: #88d16e;
+    border-color: #88d16e;
+    .el-icon-success{
+      background-image: data-uri('../../image/icon-tip-success.png');
+    }
+  }
+
+  &.el-message--error{
+    background: #ffba00;
+    border-color: #ffba00;
+    .el-icon-error{
+      background-image: data-uri('../../image/icon-tip-error.png');
+    }
+  }
+}
+
+.el-message-box__wrapper{outline: none;}
+.el-message-box{padding-bottom: 0;}
+.el-message-box .el-message-box__title{display: inline;}
+.el-message-box__btns{overflow: hidden;padding: 10px 16px 16px 16px;}
+.el-message-box__message{font-size: 14px;margin-left: 0 !important;color: #5d5e64;text-align: center;margin-top: 10px;padding: 0 !important;}
+.el-message-box__status{
+  position: static;
+  margin: auto;
+  width: 108px;
+  display: block;
+  height: 34px;
+  padding-left: 44px;
+  background: data-uri('../../image/icon-dialog-confirm.png') left center no-repeat;
+  &:before{display: none;}
+  &:after{
+    content: '提示';
+    font-size: 16px;
+    color: #3b3b3b;
+  }
+  .translate(0, 0);
+}
+
+.el-message-box{
+  width: 512px;
+}
+
+.el-message__group p{
+  word-break: break-all;
+  white-space: normal;
+}

@@ -15,10 +15,34 @@
     <meta name="viewport" content="user-scalable=no">
     <meta name="viewport" content="initial-scale=1,maximum-scale=1">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <script>
+        ;(function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    docEl.style.fontSize = '100px'
+                    // if(typeof(clientWidth)=='number' && clientWidth < 750 && clientWidth>319){
+                    //     docEl.style.fontSize = 20 * (clientWidth / 375) + 'px';
+                    // }else if(typeof(clientWidth)=='number' && clientWidth>750){
+                    //     docEl.style.fontSize = '40'+'px';
+                    // }
+                };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+            recalc();
+        })(document, window);
+    </script>
 </head>
 <body>
 <div id="body">
     <router-view></router-view>
+    <div class="dialog-detail" id="browser">
+        <app-dialog :class="style" :title="title" :width="width" ref="dialogDetail" @close="close"></app-dialog>
+        <app-dialog :title="subTitle" :width="subWidth" ref="dialogSubDetail" @close="closeSub"></app-dialog>
+        <iframe class="download-iframe" name="download" style="display: none;"></iframe>
+    </div>
 </div>
 </body>
 </html>

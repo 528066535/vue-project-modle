@@ -1,0 +1,31 @@
+.el-popover{
+  padding: 0;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 7px rgba(0,0,0,.13);
+
+  &[x-placement^=bottom] .popper__arrow{
+    border-bottom-color: #ccc;
+  }
+
+  &[x-placement^=right] .popper__arrow{
+    border-right-color: #ccc;
+  }
+
+  &.dark{
+    border: 1px solid #171d2d;
+
+    &[x-placement^=bottom] .popper__arrow{
+      border-bottom-color: #171d2d;
+      &:after{
+        border-bottom-color: #171d2d;
+      }
+    }
+  }
+}
+
+.el-tag--mini {
+  line-height: 14px;
+  padding: 0 1px 1px;
+  height: 16px;
+}

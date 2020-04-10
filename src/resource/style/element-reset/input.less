@@ -1,0 +1,183 @@
+@import "../trans";
+
+//输入框默认和 hover状态的样式
+.el-range-editor, .self-input,.el-textarea .el-textarea__inner, .el-input .el-input__inner, .el-pagination__sizes .el-input .el-input__inner, .el-pagination__editor {
+  border-radius: 2px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 0 1px #f4f4f4;
+  color: #1e1e1e;
+
+  &:hover{
+    border: 1px solid #abafb4;
+    box-shadow: 0 0 0 1px #dddfe2;
+  }
+
+  .setPlaceholderColor();
+}
+
+.el-input.is-disabled .el-input__inner,.el-textarea.is-disabled .el-textarea__inner{
+  color: #1e1e1e;
+  background: #ededed;
+  border-color: #ccc !important;
+}
+.el-input.is-disabled .el-input-group__prepend{
+  background: #ededed;
+}
+
+//输入框获得焦点样式
+.el-date-editor, .el-input:not(.self-input){
+  .el-textarea__inner, .el-input__inner{
+    &:focus{
+      border: 1px solid #52abfe;
+      box-shadow: 0 0 0 1px #a2d2ff;
+    }
+  }
+}
+
+.el-input.self-input{
+  .transition(border-color, .2s, cubic-bezier(.645,.045,.355,1));
+  .el-textarea__inner,.el-input__inner,.el-textarea__inner:hover,.el-input__inner:hover{
+    border: none;
+    box-shadow: none;
+  }
+  &.self-input-focus{
+    border: 1px solid #52abfe;
+    box-shadow: 0 0 0 1px #a2d2ff;
+  }
+
+  .el-input{
+    .el-textarea__inner, .el-input__inner{
+      &:focus{
+        border: none;
+        box-shadow: none;
+      }
+    }
+  }
+
+  &.el-input--small .el-input__inner,.el-input-group__prepend {
+    line-height: 28px;
+    height: 28px;
+  }
+}
+
+//输入框大小样式
+.el-input--small .el-input__inner {
+  line-height: 30px;
+  height: 30px;
+}
+.el-input--small .el-input__inner{
+  padding: 0 20px 0 10px;
+}
+
+//清除按钮样式
+.el-input .el-input__suffix,.el-date-editor--datetime{
+  width: 20px;
+  display: block;
+}
+
+.el-textarea .el-textarea__inner{height: 100%;padding: 5px 10px;}
+
+.el-range-editor,.el-input .el-input__suffix .el-input__suffix-inner ,.el-date-editor--datetime .el-input__suffix-inner {
+  .el-icon-circle-close{
+    .transition(none);
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    margin-top: -7px;
+    background: data-uri('../../image/icon-cross.png') center no-repeat;
+    &:before{content: '';}
+
+    &:hover{
+      background: data-uri('../../image/icon-cross-hover.png') center no-repeat;
+    }
+  }
+}
+.el-date-editor--daterange{
+  .el-range__close-icon{
+    position: absolute;
+    right: 5px;
+  }
+}
+.is-disabled{
+  .el-icon-circle-close{display: none !important;}
+}
+
+.el-range-editor .el-icon-circle-close{right: 6px;left: auto;}
+
+//日期输入框样式
+.el-range-editor--small.el-input__inner {
+  height: 30px;
+}
+.el-date-editor.is-disabled,.el-date-editor.is-disabled input{
+  color: #1e1e1e;
+  background: #ededed;
+}
+.el-date-editor.is-disabled{
+  border-color: #ccc !important;
+}
+.el-range-editor.is-disabled .el-range-separator{color: #1e1e1e;}
+.el-range-editor {
+  //至文字
+  .el-range-separator {
+    color: #3b3b3b;
+    font-size: 14px;
+    line-height: 23px;
+  }
+}
+
+.el-input-group--prepend {
+  .el-textarea__inner:hover, .el-input__inner:hover {
+    border: none;
+  }
+
+  .el-select{
+    width: 100px;
+  }
+}
+
+.el-input-group__append, .el-input-group__prepend {
+  border: none;
+  border-radius: 0;
+  background: #fff;
+  color: #4f4f4f;
+  padding: 0 10px;
+  line-height: 30px;
+  height: 30px;
+  .el-select{
+    margin: 0 -10px;
+    .el-input.is-focus .el-input__inner{
+      border: none;
+      box-shadow: none;
+    }
+  }
+}
+
+.el-date-editor.el-input{
+  .el-input__inner{
+    padding-left: 27px;
+  }
+
+  .el-input__prefix{left: 2px;}
+}
+.el-range-editor, .el-date-editor.el-input{
+  .el-input__prefix .el-input__icon, .el-range__icon{
+    margin-right: 5px;
+    &:before{
+      display: none;
+    }
+
+  }
+}
+.el-date-editor.el-input, .el-date-editor.el-input__inner{width: 170px;}
+.el-range-editor .el-range__icon{
+  display: inline-block;
+  width: 18px;
+  height: 20px;
+}
+.el-date-editor.el-input .el-input__prefix .el-input__icon,.el-range-editor .el-range__icon{
+  background: data-uri('../../image/icon-datepicker.png') center no-repeat;
+}

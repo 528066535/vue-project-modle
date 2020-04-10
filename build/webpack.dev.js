@@ -38,7 +38,7 @@ module.exports = merge(common,{
             },
             {
                 test: /\.less$/,
-                exclude: /node_modules|bootstrap/,
+                exclude: /node_modules/,
                 use: [
                     'style-loader',
                     { loader: 'css-loader', options: { importLoaders: 1 } },

@@ -109,8 +109,41 @@ p {
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
-    white-space: nowrap;
     margin: 0;
+    white-space: normal;
 }
 
+.fl {
+    float: left;
+}
 
+.fr {
+    float: right;
+}
+
+.m-link {
+    cursor: pointer;
+}
+
+.icon {
+    width:20px;
+    height:20px;
+    display: inline-block;
+    background-repeat:no-repeat;
+    background-position:50% 50%;
+    margin-right:10px;
+    vertical-align: middle;
+}
+
+.dashboard__container {
+    & >div {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        .table-container{
+            overflow: hidden;
+            flex: 1;
+            padding-left: 10px;
+        }
+    }
+}

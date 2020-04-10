@@ -16,13 +16,13 @@ app.use(middleware(compiler, {
     }
 }));
 
-app.use(proxy('/api', {
+app.use(proxy('/luke/', {
     target: CONFIG.API_URL,
     xfwd: true,
     changeOrigin: false,
     rewrite: path => {
         console.log(path);
-        return path.replace('/api/', '/');
+        return path.replace('/luke/', '/luke/');
     },
     logs: false
 }));

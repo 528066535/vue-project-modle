@@ -1,0 +1,165 @@
+.borderBox(){
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -ms-box-sizing:border-box;
+  -o-box-sizing:border-box;
+  box-sizing:border-box;
+}
+
+/*启用GPU加速*/
+.useGPU{
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+  -ms-perspective: 1000px;
+  perspective: 1000px;
+}
+/*启用GPU加速*/
+
+/*模糊滤镜*/
+.filterBlur(@blur: 1px){
+  -webkit-filter: blur(@blur);
+  -moz-filter: blur(@blur);
+  -ms-filter: blur(@blur);
+  -o-filter: blur(@blur);
+  filter: blur(@blur);
+}
+/*设置过渡效果*/
+.transition(@type: all, @time: .4s, @ease: ease){
+  -webkit-transition: @type @time @ease;
+  -moz-transition: @type @time @ease;
+  -o-transition: @type @time @ease;
+  -ms-transition: @type @time @ease;
+  transition: @type @time @ease;
+}
+
+.transitionDelay(@time: 0s){
+  -webkit-transition-delay: @time;
+  -moz-transition-delay: @time;
+  -ms-transition-delay: @time;
+  -o-transition-delay: @time;
+  transition-delay: @time;
+}
+
+.animation(@name, @duration: 1s, @time: infinite, @ease: linear, @lastFrame:normal){
+  -webkit-animation: @name @duration @time @ease @lastFrame;
+  -moz-animation: @name @duration @time @ease @lastFrame;
+  -ms-animation: @name @duration @time @ease @lastFrame;
+  -o-animation: @name @duration @time @ease @lastFrame;
+  animation: @name @duration @time @ease @lastFrame;
+}
+
+.transformOrigin(@transform:100% 100%){
+  -webkit-transform-origin: @transform;
+  -moz-transform-origin: @transform;
+  -ms-transform-origin: @transform;
+  -o-transform-origin: @transform;
+  transform-origin: @transform;
+}
+
+.transformDelay(@time: 0){
+  -webkit-animation-delay: @time;
+  -moz-animation-delay: @time;
+  -ms-animation-delay: @time;
+  -o-animation-delay: @time;
+  animation-delay: @time;
+}
+/*设置过渡效果*/
+
+/*旋转*/
+.rotate(@deg: 0deg){
+  -webkit-transform: rotate(@deg);
+  -moz-transform: rotate(@deg);
+  -ms-transform: rotate(@deg);
+  -o-transform: rotate(@deg);
+  transform: rotate(@deg);
+}
+.rotateZ(@deg: 0deg){
+  -webkit-transform: rotateZ(@deg);
+  -moz-transform: rotateZ(@deg);
+  -ms-transform: rotateZ(@deg);
+  -o-transform: rotateZ(@deg);
+  transform: rotateZ(@deg);
+}
+.rotateY(@deg: 0deg){
+  -webkit-transform: rotateY(@deg);
+  -moz-transform: rotateY(@deg);
+  -ms-transform: rotateY(@deg);
+  -o-transform: rotateY(@deg);
+  transform: rotateY(@deg);
+}
+/*旋转*/
+
+/*放大缩小*/
+.scale(@scale: 1){
+  -webkit-transform: scale(@scale);
+  -moz-transform: scale(@scale);
+  -ms-transform: scale(@scale);
+  -o-transform: scale(@scale);
+  transform: scale(@scale);
+}
+/*放大缩小*/
+/*位移*/
+.translate(@x: 0, @y: 0){
+  -webkit-transform: translate(@x, @y);
+  -moz-transform: translate(@x, @y);
+  -ms-transform: translate(@x, @y);
+  -o-transform: translate(@x, @y);
+  transform: translate(@x, @y);
+}
+/*位移*/
+.box{
+  display:-webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+.box-column{
+  -webkit-flex-direction:column;
+  -moz-flex-direction:column;
+  -ms-flex-direction:column;
+  flex-direction:column;
+}
+.box-row{
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+.box-flex(@v: 1){
+  -webkit-box-flex:@v;
+  -webkit-flex:@v;
+  -moz-flex:@v;
+  -ms-flex:@v;
+  flex:@v;
+}
+
+.gradientRadius(@from, @to, @radius:132deg){
+  background: -webkit-linear-gradient(@radius, @from, @to);
+  background: -o-linear-gradient(@radius, @from, @to);
+  background: -moz-linear-gradient(@radius, @from, @to);
+  background: linear-gradient(@radius, @from, @to);
+}
+
+.setPlaceholderColor(@color: #bcbcbc){
+  &::-webkit-input-placeholder{color: @color;}
+  &::-moz-placeholder{color: @color;}
+  &:-moz-placeholder{color: @color;}
+  &:-ms-input-placeholder{color: @color;}
+
+  &::-webkit-input-placeholder{color: @color;}
+  &::-moz-placeholder{color: @color;}
+  &:-moz-placeholder{color: @color;}
+  &:-ms-input-placeholder{color: @color;}
+}

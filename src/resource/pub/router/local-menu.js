@@ -1,23 +1,26 @@
 import main from '@/resource/template/main'
+import login from '@Pages/login/vue/index'
 
 let menu = [];
 menu = menu.concat([
     {
-        path: '/home',
+        path: '/dashboard',
         meta: { auth: false },
         component:  main,
+        redirect:'/dashboard/home/user',
+
 
         children: [
         ]
     },
     {
-        path: '/*',
-        name: '404',
+        path: '/login',
         meta: { auth: false },
-        component:  () => import(/* webpackChunkName: "pages/error/vue/error" */'@Pages/error/vue/error'),
-
-        children: [
-        ]
+        component:  login,
+    },
+    {
+        path: '*',
+        redirect: '/dashboard/home/user'
     }
 ]);
 export default menu;
