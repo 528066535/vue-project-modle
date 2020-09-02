@@ -4,7 +4,7 @@
         <div class="dashboard__menu-list">
             <app-page ref="page">
                 <div style="width: 2rem;">
-                    <template v-for="parentMenu in menu">
+                    <template v-for="parentMenu in menu" v-if="parentMenu.meta.level.indexOf(level)>=0">
                         <router-link :class="{true:'link-active'}[!parentMenu.children && currentUrl===`/${parentMenu.path}`]" :to="{path: '/dashboard/' + parentMenu.path,query: {menu: menu.name}}" v-if="!parentMenu.children">
                             <div class="dashboard__menu-item">{{parentMenu.name}}</div>
                         </router-link>
@@ -13,7 +13,7 @@
                             <i class="el-icon-menu-right" :class="[parentMenu.open?'open':'close']"></i>
                         </div>
                         <div v-if="parentMenu.open && parentMenu.children">
-                            <router-link class="dashboard__menu-item" :class="{true:'link-active'}[currentUrl.includes(`/${parentMenu.path}/${childMenu.path}`)]" :to="{path: '/dashboard/' + parentMenu.path + '/' + childMenu.path, query: {menu: menu.name}}"  v-for="childMenu in parentMenu.children" :key="childMenu.id">
+                            <router-link v-if="childMenu.meta.level.indexOf(level)>=0" class="dashboard__menu-item" :class="{true:'link-active'}[currentUrl.includes(`/${parentMenu.path}/${childMenu.path}`)]" :to="{path: '/dashboard/' + parentMenu.path + '/' + childMenu.path, query: {menu: menu.name}}"  v-for="childMenu in parentMenu.children" :key="childMenu.id">
                                 <!--<i class="icon" :style="{'background-image': 'url('+getIcon(parentMenu.path, childMenu)+'.png?v=20181213)'}"></i>-->
                                 <span style="margin-left: 10px;">{{childMenu.name}}</span>
                             </router-link>
@@ -32,6 +32,7 @@
      */
     import { RESOURCE_IMAGE} from '@Core/config';
     import router from "@Pub/router";
+    import Data from '@Core/data'
     import routerMenu from "@Pub/router/router-menu";
 
 
@@ -55,6 +56,7 @@
 
         data(){
             return {
+                level: Data.getLevel(),
                 currentUrl: '',
                 menu: routerMenu.routers
             }

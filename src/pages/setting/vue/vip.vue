@@ -17,7 +17,7 @@
                 <el-table-column label="创建用户" prop="adminname" align="center"></el-table-column>
                 <el-table-column label="创建时间" prop="createtime" align="center">
                     <template slot-scope="scope">
-                        {{scope.row.createtime | date('yyyy-MM-dd hh:mm:ss')}}
+                        {{Number(scope.row.createtime) | date('yyyy-MM-dd hh:mm:ss')}}
                     </template>
                 </el-table-column>
                 <el-table-column label="原价" prop="oriamount" align="center"></el-table-column>

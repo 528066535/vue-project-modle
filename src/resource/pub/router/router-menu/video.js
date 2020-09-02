@@ -12,17 +12,26 @@ export default {
 
     router: [
         { path: 'video', name: '视频', component: component.blank,
+            meta: {
+                level: '1'
+            },
             children: [
                 {
                     name: '列表',
                     path: 'user',
                     component: component.list,
+                    meta: {
+                        level: '1'
+                    },
                 },
-                // {
-                //     name: '分类管理',
-                //     path: 'category',
-                //     component: component.category,
-                // },
+                {
+                    name: '分类管理',
+                    path: 'category',
+                    component: component.category,
+                    meta: {
+                        level: '1'
+                    },
+                }
                 // {
                 //     name: '作者管理',
                 //     path: 'auth',

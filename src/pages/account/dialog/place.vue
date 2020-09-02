@@ -3,9 +3,11 @@
         <app-formitem label="类型" prop="type" :rules="rules.type">
             <app-select v-model="postData.type" placeholder="请输入" :maxlength="100" :local-data="placeType"></app-select>
         </app-formitem>
+        <app-formitem label="点位名称">
+            <app-input v-model="postData.pname" placeholder="请输入" :maxlength="100"></app-input>
+        </app-formitem>
         <app-formitem label="地理位置">
             <app-input type="textarea" disabled v-model="postData.addr" placeholder="请输入" :maxlength="100"></app-input>
-            <div>点击地图选择位置(缩小地图可精确位置信息)</div>
         </app-formitem>
         <div style="width: 100%;height: 400px;">
             <baidu-map @click="getClickInfo"
@@ -43,6 +45,7 @@
                 zoom: 12,
                 postData: {
                     addr: '',
+                    pname: '',
                     type: ''
                 },
                 rules: {
@@ -102,6 +105,7 @@
             save() {
                 this.postData.jdu = this.center.lng
                 this.postData.wdu = this.center.lat
+                this.postData.adminname = ''
                 let url = this.postData.pid ? '/modifyPoint' : '/addPoint'
                 this.saveData(url,this.postData).then(res=>{
 

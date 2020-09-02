@@ -28,7 +28,9 @@ for(let i in routers) {
 }
 
 routers.concat(routerMenu.routers);
+routers.concat(routerMenu.components);
 
+console.log(routerMenu.components)
 console.log(routers)
 
 export function createApp (mode) {

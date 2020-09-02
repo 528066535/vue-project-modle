@@ -10,17 +10,27 @@ export default {
     },
 
     router: [
-        { path: 'setting', name: '设置', component: component.blank,
+        {
+            path: 'setting', name: '设置', component: component.blank,
+            meta: {
+                level: '1'
+            },
             children: [
                 {
                     name: 'banner轮播图',
                     path: 'banner',
                     component: component.banner,
+                    meta: {
+                        level: '1'
+                    },
                 },
                 {
                     name: 'VIP套餐设置',
                     path: 'vip',
                     component: component.vip,
+                    meta: {
+                        level: '1'
+                    },
                 }
             ]},
     ]

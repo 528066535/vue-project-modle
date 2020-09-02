@@ -1,11 +1,11 @@
 <template>
     <div class="dashboard__header" :class="{shadow: shadow}">
-        <div class="fl logo-wrap">
+        <div class="fl logo-wrap" @click="goIndex">
             <div class="logo" style="display: inline-block">
                 <!--logo-->
                 <img src="../image/logo-s.png" onerror="this.src='../image/logo-s.png'"/>
             </div>
-            睩客后台系统
+            新草后台系统
         </div>
 
         <div class="fr" style="position: relative;z-index: 4;top: 50%;margin: -0.15rem 10px;">
@@ -63,6 +63,9 @@
         computed: {},
 
         methods: {
+            goIndex() {
+                router.go('/index')
+            },
             getUrl(model) {
                 this.showModes = false;
                 if (model.url.indexOf('http://') >= 0 || model.url.indexOf('https://') >= 0) {
@@ -133,7 +136,7 @@
         height: 60px;
         position: relative;
         z-index: 1001;
-        background: linear-gradient(36deg, rgb(48, 65, 86) 0%, #1d4d7e 100%);
+        background: linear-gradient(36deg, #53657b 0%, #1d4d7e 100%);
         box-shadow: 0 0.05rem 0.05rem rgba(0, 0, 0, 0.2);
 
         .el-dropdown-link {

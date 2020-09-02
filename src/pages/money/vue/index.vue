@@ -1,8 +1,8 @@
 <template>
     <div>
         <app-condition>
-            <app-formitem label="名称">
-                <app-input @keyup="search" v-model="conditions.carriername"></app-input>
+            <app-formitem label="账号">
+                <app-input @keyup="search" v-model="conditions.loginname"></app-input>
             </app-formitem>
             <app-formitem>
                 <app-button type="primary" @click="search">搜索</app-button>
@@ -12,7 +12,12 @@
             <app-table ref="table" url="/queryOrders">
                 <el-table-column label="账号" prop="loginname" align="center"></el-table-column>
                 <el-table-column label="昵称" prop="nickname" align="center"></el-table-column>
-                <el-table-column label="充值金额" prop="amount" align="center"></el-table-column>
+                <el-table-column label="运营商" prop="carriername" align="center"></el-table-column>
+                <el-table-column label="充值金额" prop="amount" align="center">
+                    <template slot-scope="scope">
+                        {{scope.row.amount/100}}
+                    </template>
+                </el-table-column>
                 <el-table-column label="支付方式" prop="payway" align="center">
                     <template slot-scope="scope">
                         {{['微信'][scope.row.payway-1]}}
@@ -28,7 +33,7 @@
         data() {
             return {
                 conditions: {
-                    carriername: ''
+                    loginname: ''
                 }
             }
         },

@@ -9,11 +9,20 @@ export default {
     },
 
     router: [
-        { path: 'test', name: '测试', component: component.blank,
+        {
+            path: 'test',
+            meta: {
+                level: '1'
+            },
+            name: '测试',
+            component: component.blank,
             children: [
                 {
                     name: '界面',
                     path: 'test',
+                    meta: {
+                        level: '1'
+                    },
                     component: component.test,
                 },
         ]},

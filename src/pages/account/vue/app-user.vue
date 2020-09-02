@@ -12,7 +12,7 @@
             <!--</div>-->
         </app-condition>
         <div class="table-container">
-            <app-table ref="table" url="/queryAppUsers">
+            <app-table ref="table" :url="api" :param="getParams()">
                 <el-table-column label="账号" prop="loginname" align="center"></el-table-column>
                 <el-table-column label="昵称" prop="nickname" align="center"></el-table-column>
                 <el-table-column label="邮箱" prop="email" align="center"></el-table-column>
@@ -20,8 +20,9 @@
                 <el-table-column label="年龄" prop="age" align="center"></el-table-column>
                 <el-table-column label="地址" prop="addrcity" align="center"></el-table-column>
                 <el-table-column label="vip到期日期" prop="vipexpdate" align="center"></el-table-column>
-                <el-table-column  label="操作" align="center">
+                <el-table-column  label="操作" align="center" width="250px">
                     <template slot-scope="scope">
+                        <app-button icon="edit" size="mini" @click="setTime(scope.row)">设置有效期</app-button>
                         <app-button icon="edit" size="mini" @click="edit(scope.row)">重置密码</app-button>
                     </template>
                 </el-table-column>
@@ -42,17 +43,39 @@
                 }
             }
         },
+        computed: {
+            api() {
+                if (this.$route.query.type) {
+                    return '/queryAppUsersHome'
+                } else {
+                    return '/queryAppUsers'
+                }
+            }
+        },
         created() {
 
         },
 
         mounted() {
-
         },
 
-        methods: {
+        methods:{
+            getParams() {
+                let params = this.conditions
+                params.queryType = this.$route.query.type
+                return params
+            },
             search(){
-                this.$refs.table.reload(this.conditions);
+                this.$refs.table.reload();
+            },
+            setTime(row){
+                import(/* webpackChunkName: "pages/account/dialog/user-time" */'../dialog/user-time').then(component => {
+                    Dialog.open(component, row, {
+                        title: '修改有效期',
+                        width: 400,
+                        parent: this
+                    });
+                });
             },
             add() {},
             edit(row) {

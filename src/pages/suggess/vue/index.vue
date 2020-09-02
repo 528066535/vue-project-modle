@@ -1,8 +1,8 @@
 <template>
     <div>
         <app-condition>
-            <app-formitem label="名称">
-                <app-input @keyup="search" v-model="conditions.carriername"></app-input>
+            <app-formitem label="账号">
+                <app-input @keyup="search" v-model="conditions.loginname"></app-input>
             </app-formitem>
             <app-formitem>
                 <app-button type="primary" @click="search">搜索</app-button>
@@ -26,14 +26,13 @@
         data() {
             return {
                 conditions: {
-                    carriername: ''
+                    loginname: ''
                 }
             }
         },
         created() {
 
         },
-
         mounted() {
 
         },

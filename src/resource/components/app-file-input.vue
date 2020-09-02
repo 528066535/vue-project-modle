@@ -13,7 +13,7 @@
                    :before-upload="beforeUpload"
                    :on-preview="onPreview"
                    :show-file-list="type==='button'"
-                   :data="param"
+                   :data="params"
                    :auto-upload="autoUpload"
                    :on-change="onChange"
         >
@@ -142,6 +142,11 @@
         },
 
         computed: {
+            params() {
+                let params = Object.assign({token: Data.getToken()},this.param)
+                params.tokenname = Data.getUser();
+                return params
+            },
             calLimit(){
                 if (this.type === 'button' && !this.isObject) {
                     return this.limit;
@@ -345,6 +350,7 @@
 
             beforeRemove(){
                 this.$emit('del-file');
+                this.loading = false
                 // return this.promiseDel().then((res)=>{
                 //
                 // });

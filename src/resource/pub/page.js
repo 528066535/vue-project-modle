@@ -39,14 +39,19 @@ export default {
                             util.debounce(300).then(() => {
                                 http.post(url, postJson).then((d) => {
                                     dialog.success(successTip || d.msg || '操作成功');
+                                    resolve(d);
                                     this.dialog && this.dialog.close();
                                     if(this.parent && this.parent.$refs && this.parent.$refs.table){
                                         this.parent.$refs.table.refresh();
                                     }
-                                    resolve(d);
                                 },(error)=>{
+                                    if(error.code == -2) {
+                                        dialog.close()
+                                    }
                                     reject(error);
-                                }).always(() => {
+                                }).catch((d)=>{
+
+                                }).always((res) => {
                                     this.posting = false;
                                 });
                             });

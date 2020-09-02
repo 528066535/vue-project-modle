@@ -1,5 +1,6 @@
 import main from '@/resource/template/main'
 import login from '@Pages/login/vue/index'
+import index from '@Pages/index/index-new'
 
 let menu = [];
 menu = menu.concat([
@@ -19,8 +20,13 @@ menu = menu.concat([
         component:  login,
     },
     {
+        path: '/index',
+        meta: { auth: false },
+        component:  index,
+    },
+    {
         path: '*',
-        redirect: '/dashboard/home/user'
+        redirect: '/index'
     }
 ]);
 export default menu;

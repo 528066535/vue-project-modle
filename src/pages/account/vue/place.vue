@@ -14,6 +14,7 @@
         <div class="table-container">
             <app-table ref="table" url="/queryPoints">
                 <el-table-column  show-overflow-tooltip label="位置" prop="addr" align="center"></el-table-column>
+                <el-table-column  show-overflow-tooltip label="点位名称" prop="pname" align="center"></el-table-column>
                 <el-table-column label="类型" prop="type" align="center">
                     <template slot-scope="scope">
                         {{['服务点','学校','医院'][scope.row.type]}}

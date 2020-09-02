@@ -16,7 +16,7 @@
                 <el-table-column label="名称" width="100" prop="imgname" align="center"></el-table-column>
                 <el-table-column label="上传时间" prop="loginname" align="center">
                     <template slot-scope="scope">
-                        {{scope.row.createtime | date('yyyy-MM-dd hh:mm:ss')}}
+                        {{Number(scope.row.createtime) | date('yyyy-MM-dd hh:mm:ss')}}
                     </template>
                 </el-table-column>
                 <el-table-column label="图片" prop="activetime" align="center">
@@ -54,6 +54,7 @@
 
         methods: {
             del(row){
+                delete row.adminname
                 this.$refs.table.delSelectedSinglelistByMethods('/deleteLoopImg', row)
             },
             search(){
@@ -62,7 +63,7 @@
             add() {
                 import(/* webpackChunkName: "pages/setting/change-password-dialog" */'../dialog/banner').then(component => {
                     Dialog.open(component, {}, {
-                        title: '新增设备',
+                        title: '新增',
                         width: 600,
                         parent: this
                     });

@@ -42,6 +42,18 @@ let removeToken = () => {
     remove(Config.DATA.TOKEN);
 };
 
+let getLevel = () => {
+    return get(Config.DATA.USER_LEVEL);
+};
+
+let setLevel = (item) => {
+    return set(Config.DATA.USER_LEVEL,item);
+};
+
+let removeLevel = () => {
+    remove(Config.DATA.USER_LEVEL);
+};
+
 function getKey(code) {
     return Config.DATA.PREFIX + code;
 }
@@ -71,6 +83,9 @@ export default {
     uncompile,
     getUser,
     setUser,
+    setLevel,
+    getLevel,
+    removeLevel,
     removeUser,
     getToken,
     setToken,

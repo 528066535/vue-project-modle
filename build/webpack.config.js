@@ -41,9 +41,15 @@ module.exports = {
             chunks: ["vendor","index","commons","css"],
             template: './src/resource/template/index.html',
             inject: 'body',
-            title: '测试',
+            title: '新草',
             hash: false
         }),
+        // new HtmlWebpackPlugin({
+        //     filename: 'index.html',
+        //     chunks: [],
+        //     template: './src/resource/template/index.html',
+        //     title: '睩客',
+        // }),
         new ManifestPlugin({
             fileName: 'manifest.json',
             basePath: '',

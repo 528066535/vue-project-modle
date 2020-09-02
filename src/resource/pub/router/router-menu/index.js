@@ -1,5 +1,5 @@
 import home from './home';
-// import test from './test';
+import test from './test';
 import account from './account';
 import video from './video';
 import setting from './setting';

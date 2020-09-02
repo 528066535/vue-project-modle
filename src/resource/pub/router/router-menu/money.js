@@ -9,6 +9,12 @@ export default {
     },
 
     router: [
-        { path: 'money', name: '充值记录', component: component.money }
+        {
+            path: 'money',
+            name: '充值记录',
+            meta: {
+                level: '1'
+            },
+            component: component.money }
     ]
 }

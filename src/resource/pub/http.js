@@ -40,7 +40,7 @@ function trimData(data, method) {
  * @returns {*}
  */
 
-function ajax(url, data, method, silent){
+function ajax(url, data={}, method, silent){
     let dtd = $.Deferred();
     let param = '';
     let headers = {
@@ -67,9 +67,11 @@ function ajax(url, data, method, silent){
     const token = Data.getToken();
     if(token){
         headers.Token = token;
+        data.token = token
     }
     // param.token = token;
-    param.adminname = Data.getUser();
+    param.tokenname = param.tokenname?param.tokenname:Data.getUser();
+    // param.adminname = param.tokenname?param.tokenname:Data.getUser();
 
     $.ajax(`${PROXY_URL}${url}`, {
         data: param,
@@ -86,6 +88,13 @@ function ajax(url, data, method, silent){
                 }
                 if(data.code == '0') {
                     dtd.resolve(data, response);
+                }
+                else if(data.code == '-2') {
+                    this.dialog && this.dialog.close();
+                    Data.removeToken('')
+                    Data.removeLevel()
+                    dtd.reject(data, response);
+                    document.location.href = '/#/login'
                 }
                 else {
                     dialog.error(data.msg);
@@ -285,7 +294,7 @@ export default {
     },
 
     link(url){
-        window.open(`/api${parseUrl(url)}`, 'download');
+        window.open(`/luke${parseUrl(url)}`, 'download');
     },
 
     downloadFile(path,name=''){

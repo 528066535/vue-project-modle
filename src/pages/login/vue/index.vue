@@ -44,7 +44,7 @@
                 </el-form-item>
             </el-tooltip>
 
-            <el-button :loading="loading" type="primary" style="width:100%;height: 50px;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
+            <el-button type="primary" style="width:100%;height: 50px;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
         </el-form>
 
     </div>
@@ -126,6 +126,7 @@
                         this.loading = true
                         http.post('/carrierLogin',{adminname: this.loginForm.username,adminpwd: this.loginForm.password}).then(res=>{
                             Data.setUser(this.loginForm.username)
+                            Data.setLevel(res.carrierlv)
                             router.go('/dashboard')
                         }).catch(error=>{
                             this.loading = false

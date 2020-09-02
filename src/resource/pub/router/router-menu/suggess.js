@@ -8,6 +8,11 @@ export default {
     },
 
     router: [
-        { path: 'suggess', name: '反馈与建议', component: component.suggess }
+        {
+            path: 'suggess',
+            meta: {
+                level: '1'
+            },
+            name: '反馈与建议', component: component.suggess }
     ]
 }

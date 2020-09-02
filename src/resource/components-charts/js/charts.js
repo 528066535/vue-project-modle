@@ -121,15 +121,27 @@ export default {
             }, this.xStyle);
 
             return {
+                // 是否显示 x 轴
                 show: style.display,
+                // 坐标轴的分割段数，需要注意的是这个分割段数只是个预估值，最后实际显示的段数会在这个基础上根据分割后坐标轴刻度显示的易读程度作调整。在类目轴中无效。
                 splitNumber: style.splitNumber,
+                // 坐标轴刻度最大值。
                 max: this.max,
+                // 坐标轴刻度标签的相关设置。
                 axisLabel: {
+                    // 坐标轴刻度文字的颜色
                     color: style.color,
+                    // 是否显示坐标轴刻度文字
                     show: style.displayLabel,
+                    // 刻度标签的内容格式器，支持字符串模板和回调函数两种形式。
                     formatter: style.formatter,
+                    // 坐标轴重叠的情况下需要旋转文字
                     rotate: style.rotate,
                     align: style.align,
+                    // 坐标轴刻度标签的显示间隔，在类目轴中有效。
+                    // 默认会采用标签不重叠的策略间隔显示标签。
+                    // 可以设置成 0 强制显示所有标签。
+                    // 如果设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此类推。
                     interval: style.interval,
 
                     rich: {
@@ -139,6 +151,7 @@ export default {
                         }
                     }
                 },
+                // 坐标轴轴线相关设置。
                 axisLine: {
                     show: style.displayAxisLine,
                     lineStyle: {
@@ -146,6 +159,7 @@ export default {
                         color: style.axisLineColor
                     }
                 },
+                // x 轴上面的分隔线
                 splitLine: {
                     show: style.displaySplitLine,
                     lineStyle: {
@@ -153,12 +167,14 @@ export default {
                         color: style.splitLineColor
                     }
                 },
+                // 文字上面的刻度标记
                 axisTick: {
                     show: style.displayAxisTick
                 },
                 splitArea: {
                     show: style.displayAreaSplit
                 },
+                // 坐标轴两边有空隙
                 boundaryGap: style.boundaryGap,
                 type: style.type,
                 data: []
@@ -181,6 +197,7 @@ export default {
                 splitLineWidth: 1,
                 formatter: null,
                 type: 'value',
+                minInterval: null,
                 max: null,
             }, this.yStyle);
 
@@ -189,6 +206,7 @@ export default {
                 show: style.display,
                 inverse: this.inverse,
                 max: style.max,
+                minInterval: style.minInterval,
                 axisLabel: {
                     show: style.displayLabel,
                     color: style.color,

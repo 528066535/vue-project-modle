@@ -6,9 +6,9 @@
         <app-formitem v-if="!subVideo" label="类型" prop="tsid" :rules="rules.tsid">
             <el-cascader size="small" :options="options" v-model="tsid" style="width: 200px"></el-cascader>
         </app-formitem>
-        <app-formitem v-if="!subVideo" label="总集数" prop="totalnum" :rules="rules.totalnum">
-            <app-input type="number" v-model="postData.totalnum" placeholder="请输入" style="width: 200px"></app-input>
-        </app-formitem>
+        <!--<app-formitem v-if="!subVideo" label="总集数" prop="totalnum" :rules="rules.totalnum">-->
+            <!--<app-input type="number" v-model="postData.totalnum" placeholder="请输入" style="width: 200px"></app-input>-->
+        <!--</app-formitem>-->
         <app-formitem v-if="!subVideo" label="是否是VIP" prop="isvip" :rules="rules.isvip">
             <el-radio-group v-model="postData.isvip">
                 <el-radio :label="0">普通用户</el-radio>
@@ -17,7 +17,7 @@
         </app-formitem>
         <app-formitem label="是否处理过" prop="isreal" :rules="rules.isreal">
             <el-radio-group v-model="postData.isreal">
-                <el-radio :label="-1">是</el-radio>
+                <el-radio :label="1">是</el-radio>
                 <el-radio :label="0">否</el-radio>
             </el-radio-group>
         </app-formitem>
@@ -71,25 +71,23 @@
                 },
                 tsid: [],
                 options: [],
-                filev: {},
-                filep: {}
-            }
-        },
-        computed: {
-            subVideo(){
-                return !!this.data.vid
+                filev: { url: '' },
+                filep: { url: '' },
+                subVideo: false
             }
         },
         watch:{
             filev: {
                 handler: function(file) {
                     this.postData.filev = file.url
+                    this.postData.vurl = file.url
                 },
                 deep: true
             },
             filep: {
                 handler: function(file) {
                     this.postData.filep = file.url
+                    this.postData.vimg = file.url
                 },
                 deep: true
             },
@@ -97,6 +95,7 @@
                 handler(){
                     this.postData.tmid = this.tsid[0]
                     this.postData.tsid = this.tsid[1]
+                    this.postData.vtypeid = this.tsid[1]
                 },
                 // immediate: true,  //刷新加载 立马触发一次handler
                 deep: true  // 可以深度检测到 person 对象的属性值的变化
@@ -106,8 +105,8 @@
         methods: {
             save() {
                 let url = ''
-                if(this.subVideo) {
-                    url = '/uploadVideoSub'
+                if(this.data.vid) {
+                    url = '/modifyVideo'
                 }
                 else {
                     url = '/uploadVideoMain'
@@ -119,20 +118,33 @@
         },
         mounted(){
             if (this.data.vid) {
-                this.postData.belongid = this.data.vid
+                Object.assign(this.postData, this.data)
+                delete this.postData.adminname
+                this.filep.url = this.data.vimg
+                this.filev.url = this.data.vurl
             }
+            delete this.postData.adminname
+
             Http.get('/queryVideoTypes').then((res) => {
+                let typeList = ['','']
                 this.options = res.mainlist.map(data => {
                     let item = {
                         value: data.tmid,
                         label: data.tmname
                     }
-                    item.children = data.sectionlist.map(data => {
+                    item.children = data.sectionlist.map(subData => {
+                        if(this.data.vtypeid === subData.tsid) {
+                            typeList[1] = subData.tsid
+                        }
                         return {
-                            value: data.tsid,
-                            label: data.tsname
+                            value: subData.tsid,
+                            label: subData.tsname
                         }
                     })
+                    if(typeList[1] && !typeList[0]) {
+                        typeList[0] = data.tmid
+                    }
+                    this.tsid = typeList
                     return item
                 })
             })

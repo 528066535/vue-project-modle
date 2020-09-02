@@ -9,7 +9,7 @@
                :class="{multiselect: multiple,'cant-clear':!clearable}" ref="select" @change="change"
                :multiple="multiple" :disabled="disabled" size="small" v-model="nativeValue" :qgs_param="$vnode.data.model.expression">
         <slot></slot>
-        <el-option v-for="(option, index) in displayOptions" :key="option[valueName] + index" :label="option[keyName]" :value="option[valueName]" :disabled="option.disabled"></el-option>
+        <el-option v-for="(option, index) in displayOptions" :key="option[valueName] + '--' + index" :label="option[keyName]" :value="option[valueName]" :disabled="option.disabled"></el-option>
     </el-select>
 </template>
 

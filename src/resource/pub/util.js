@@ -175,6 +175,20 @@ let tool = {
         Data.removeToken()
         Data.removeUser()
         Router.go('/login')
+    },
+
+    getHex(color){
+        color = color.replace('#', '').toUpperCase();
+        if(color.length === 3){
+            let arr = color.split('');
+            color = arr[0] + arr[0] + arr[1] + arr[1] + arr[2] + arr[2];
+        }
+        let arr = color.split('');
+        return {
+            R: parseInt([arr[0],arr[1]].join(''), 16),
+            G: parseInt([arr[2],arr[3]].join(''), 16),
+            B: parseInt([arr[4],arr[5]].join(''), 16)
+        }
     }
 };
 

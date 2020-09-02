@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+    <!-- viewport 后面加上 minimal-ui 在safri 体现效果 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- 隐藏状态栏/设置状态栏颜色 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <meta name="viewport" content="user-scalable=no">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <script>
+        ;(function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    docEl.style.fontSize = '100px'
+                    // if(typeof(clientWidth)=='number' && clientWidth < 750 && clientWidth>319){
+                    //     docEl.style.fontSize = 20 * (clientWidth / 375) + 'px';
+                    // }else if(typeof(clientWidth)=='number' && clientWidth>750){
+                    //     docEl.style.fontSize = '40'+'px';
+                    // }
+                };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+            recalc();
+        })(document, window);
+    </script>
+    <style>
+        img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="img-holder">
+    <img src="./image/home/1.jpg" alt="">
+    <img src="./image/home/2.jpg" alt="">
+    <img src="./image/home/3.jpg" alt="">
+    <img src="./image/home/4.jpg" alt="">
+    <img src="./image/home/5.jpg" alt="">
+    <img src="./image/home/6.jpg" alt="">
+    <img src="./image/home/7.jpg" alt="">
+    <img src="./image/home/8.jpg" alt="">
+    <img src="./image/home/9.jpg" alt="">
+    <img src="./image/home/10.jpg" alt="">
+    <img src="./image/home/11.jpg" alt="">
+    <img src="./image/home/12.jpg" alt="">
+    <img src="./image/home/13.jpg" alt="">
+    <img src="./image/home/14.jpg" alt="">
+    <img src="./image/home/15.jpg" alt="">
+    <img src="./image/home/16.jpg" alt="">
+    <img src="./image/home/17.jpg" alt="">
+    <a href="/home.html" style="font-size: 14px;">进入后台管理界面</a>
+</div>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 100%;">
+    <div style="width: 100%; display: flex; flex-direction: column; height: 100%;">
         <el-tabs type="card" v-model="currentActive" >
             <el-tab-pane :name="index+''" :label="tab" v-for="(tab, index) in tabs" :key="index"></el-tab-pane>
         </el-tabs>
@@ -31,11 +31,12 @@
 <style lang="less">
     @import "../style/trans";
     .tab-body{
+        flex: 1;
         th, th .cell{
             background: #fff;
         }
     }
-    .el-tabs--card>.el-tabs__header{margin: 0;}
+    .el-tabs--card>.el-tabs__header{margin: 10px;}
     .el-tabs--card>.el-tabs__header .el-tabs__nav{border: none;}
     .el-tabs__item{padding: 0 15px;height: 37px;line-height: 37px;}
 
