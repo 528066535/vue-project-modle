@@ -3,6 +3,11 @@ import Store from '@Pub/store/index'
 import Router from '@Pub/router'
 import routers from '@Pub/router/local-menu'
 import routerMenu from '@Pub/router/router-menu'
+import Vue from 'vue';
+import Vant from 'vant';
+// import 'vant/lib/index.css';
+
+Vue.use(Vant);
 
 let homeRouters = null;
 for(let i in routers) {

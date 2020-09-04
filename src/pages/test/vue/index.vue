@@ -10,8 +10,9 @@
   </div>
 </template>
 <script>
-  import stack from 'vue-tantan-stack'
+  import stack from '../components/stack'
   export default {
+    el: '#stack',
     data () {
       return {
         someList: [],
@@ -24,8 +25,27 @@
       let that = this
       setTimeout(function () {
         that.someList = [
-          { html: '<img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1906469856,4113625838&fm=26&gp=0.jpg" alt="01">' },
-          { html: '<img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2534506313,1688529724&fm=26&gp=0.jpg" alt="02">' }
+          {
+            html: '<img src="img/1.png" alt="01">'
+          },
+          {
+            html: '<img src="img/2.png" alt="02">'
+          },
+          {
+            html: '<img src="img/3.png" alt="03">'
+          },
+          {
+            html: '<img src="img/4.png" alt="04">'
+          },
+          {
+            html: '<img src="img/5.png" alt="05">'
+          },
+          {
+            html: '<img src="img/6.png" alt="06">'
+          },
+          {
+            html: '<img src="img/7.png" alt="07">'
+          }
         ]
       }, 2000)
     },
