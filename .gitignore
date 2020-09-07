@@ -17,3 +17,4 @@ built
 *.sw*
 .package-lock.json
 
+idea
