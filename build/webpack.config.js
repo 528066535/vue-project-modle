@@ -52,7 +52,9 @@ module.exports = {
         new CleanWebpackPlugin(),
         new webpack.ProvidePlugin({
             Vue: 'vue',
-            Core: '@Core/index.js'
+            Core: '@Core/index.js',
+            $: "jquery",
+            jQuery: "jquery"
         })
     ],
 
@@ -64,6 +66,8 @@ module.exports = {
             '@Core': path.resolve(__dirname, "../src/resource/core"),
             '@Pub': path.resolve(__dirname, "../src/resource/pub"),
             'vue': 'vue/dist/vue.common.js',
+            'jquery':'jquery',
+            '$':'jquery'
         }
     },
 

@@ -1,10 +1,13 @@
 const component = {
   test: () => import(/* webpackChunkName: "pages/test/vue/test" */'@Pages/test/vue/test'),
+  detail: () => import(/* webpackChunkName: "pages/test/vue/test" */'@Pages/test/vue/detail'),
   blank: () => import(/* webpackChunkName: "resource/template/blank" */'@/resource/template/blank')
 };
 
 export default {
-  component: {},
+  component: {
+    'test/home/detail': component.detail,
+  },
 
   router: [
     {

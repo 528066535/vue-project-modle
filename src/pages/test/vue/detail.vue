@@ -1,26 +1,25 @@
 <template>
-  <div @click="goDetail">
-    test-1
+  <div>
+    detail-1
   </div>
 </template>
 <script>
-  import router from "@Pub/router";
   export default {
     data() {
-      return {}
+      return {
+
+      }
     },
     created() {
 
     },
 
     mounted() {
-      console.log(this.$router)
+
     },
 
     methods: {
-      goDetail() {
-        router.go('/dashboard/test/home/detail')
-      }
+
     },
   }
 

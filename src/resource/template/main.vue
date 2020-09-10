@@ -89,9 +89,11 @@
     },
     methods: {
       handleSelect(path) {
+        if (this.activeIndex == path) return
         router.go(`/dashboard/${path}`)
       },
       handleSelectSub(path) {
+        if (this.activeSubIndex == path) return
         console.log(`/dashboard/${this.activeIndex}/${path}`)
         router.go(`/dashboard/${this.activeIndex}/${path}`)
       }
