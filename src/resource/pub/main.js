@@ -2,6 +2,7 @@ import Core from '@Core'
 import Store from '@Pub/store/index'
 import Router from '@Pub/router'
 import routers from '@Pub/router/local-menu'
+import { createComponent } from '../components'
 import routerMenu from '@Pub/router/router-menu'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -37,5 +38,6 @@ export function createApp(mode) {
     router,
     store
   });
+  createComponent(Vue)
   return {app, router, store}
 }

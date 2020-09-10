@@ -189,6 +189,20 @@
         width: 0;
         flex: 1;
       }
+
+      .main-content > div {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        background: #f5f5f5;
+
+        .table-container{
+          overflow: hidden;
+          flex: 1;
+          padding-left: 10px;
+        }
+      }
     }
 
     .el-dropdown-link {

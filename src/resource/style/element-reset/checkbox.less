@@ -1,0 +1,55 @@
+@import "../trans";
+//多选框
+.el-checkbox-group{font-size: 14px;line-height: 30px;}
+.el-checkbox{font-size: 14px;}
+.el-checkbox__inner:hover{border:2px solid #4285f4;}
+.el-checkbox__inner,
+.el-checkbox__input.is-focus .el-checkbox__inner
+{width: 16px;height: 16px;border-radius:2px;border: 2px solid #aebfc6;background: #fff;}
+.el-checkbox__input.is-indeterminate .el-checkbox__inner{
+  background-color: #4285f4;border-color: #4285f4;
+}
+
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-checked.is-focus .el-checkbox__inner
+{background-color: #4285f4;border-color: #4285f4;}
+.el-checkbox__inner:after{border-width: 2px;left: 3px;top: 0;.transition(none);}
+.el-checkbox{
+  .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner{background-color: #4285f4;border-color: #4285f4;}
+}
+.el-checkbox__label{font-size: 14px;color: #1e1e1e !important;padding-left: 5px;}
+.el-checkbox+.el-checkbox{margin-left: 20px;}
+//单选框
+.el-radio-group{display: block;font-size: 14px;line-height: 30px;}
+.el-radio{font-size: 14px;}
+.el-radio__inner:hover{border:2px solid #4285f4;}
+.el-radio__inner{width: 16px;height: 16px;border: 2px solid #aebfc6;}
+.el-radio__input.is-checked .el-radio__inner{
+  background-color: #fff;
+  border:2px solid #4285f4;
+  &:after{background: #4285f4;}
+}
+.el-radio__inner:after{.transition(none);}
+.el-radio__label{font-size: 14px;color: #1e1e1e !important;padding-left: 5px;}
+.el-radio{
+  .el-radio__input.is-disabled.is-checked .el-radio__inner{
+    background-color: #fff;
+    border:2px solid #4285f4;
+    &:after{background: #4285f4;}
+  }
+}
+.el-radio-group.radio-button{
+  font-size: 0;
+  .el-radio-button{
+    &:first-child .el-radio-button__inner{
+      border-radius: 2px 0 0 2px;
+    }
+    &:last-child .el-radio-button__inner{
+      border-radius: 0 2px 2px 0;
+    }
+  }
+  .el-radio-button,.el-radio-button__inner{
+    height: 30px;
+    outline: none;
+  }
+}
