@@ -114,7 +114,7 @@
         },
         mounted(){
             this.postData = this.data ? Object.assign(this.postData, this.data) : {}
-            this.postData.type =this.data.type ?  Number(this.data.type) : ''
+            this.postData.type = this.data.type >= 0 ?  Number(this.data.type) : ''
             this.keyword = this.postData.addr
             // var map = new BMapGL.Map("container");
             // var point = new BMapGL.Point(116.404, 39.915);

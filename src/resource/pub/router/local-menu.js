@@ -1,5 +1,6 @@
 import main from '@/resource/template/main'
 import login from '@Pages/login/vue/index'
+import map from '@Pages/map/vue/index'
 import index from '@Pages/index/index-new'
 
 let menu = [];
@@ -23,6 +24,11 @@ menu = menu.concat([
         path: '/index',
         meta: { auth: false },
         component:  index,
+    },
+    {
+        path: '/map',
+        meta: { auth: false },
+        component:  map,
     },
     {
         path: '*',

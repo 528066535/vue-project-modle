@@ -6,6 +6,11 @@ import util from '@Pub/util'
 
 Vue.use(VueRouter);
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(err => err)
+}
+
 let router = null;
 
 // 1. 定义 (路由) 组件。

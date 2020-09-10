@@ -5,7 +5,6 @@
                 <!--logo-->
                 <img src="../image/logo-s.png" onerror="this.src='../image/logo-s.png'"/>
             </div>
-            新草后台系统
         </div>
 
         <div class="fr" style="position: relative;z-index: 4;top: 50%;margin: -0.15rem 10px;">
