@@ -104,6 +104,11 @@ module.exports = {
                 ]
             },
             {
+                test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+                include: /node_modules/,
+                loader: 'file-loader'
+            },
+            {
                 test: /\.(png|jpg|gif|woff)$/,
                 exclude: /node_modules/,
                 include: path.resolve(__dirname, "../src"),

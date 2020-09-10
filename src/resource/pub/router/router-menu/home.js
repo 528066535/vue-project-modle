@@ -1,5 +1,5 @@
 const component = {
-  test: () => import(/* webpackChunkName: "pages/test/vue/test" */'@Pages/test/vue/test'),
+  analyse: () => import(/* webpackChunkName: "pages/home/vue/analyse" */'@Pages/home/vue/analyse'),
   blank: () => import(/* webpackChunkName: "resource/template/blank" */'@/resource/template/blank')
 };
 
@@ -8,19 +8,19 @@ export default {
 
   router: [
     {
-      path: 'test',
-      name: '测试界面1',
+      path: 'home',
+      name: '首页',
       component: component.blank,
-      redirect: '/dashboard/test/home',
+      redirect: '/dashboard/home/analyse',
       children: [
         {
           meta: {
           },
-          name: '用户统计',
-          path: 'home',
-          component: component.test,
+          name: '统计页',
+          path: 'analyse',
+          component: component.analyse
         }
       ]
-    }
+    },
   ]
 }

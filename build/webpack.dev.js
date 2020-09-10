@@ -20,8 +20,6 @@ module.exports = merge(common,{
         rules:[
             {
                 test: /\.css$/,
-                exclude: /node_modules/,
-                include: path.resolve(__dirname, "../src"),
                 use: [
                     'style-loader',
                     'css-loader',

@@ -363,5 +363,22 @@ export default {
 
     dateDiff,
 
-    getByKey
+    getByKey,
+
+    // 获取URL参数集合
+    getUrlParams(url) {
+        if(url === undefined){
+            url = document.location.href;
+        }
+        let s = url.indexOf('?'), str = '';
+        if(s >- 1){
+            str = url.substr(s + 1, url.length - s - 1);
+        }
+        let parts = str.split('&'), params = {};
+        for(let i = 0, l = parts.length; i < l; i++){
+            let part = parts[i], ps = part.split('=');
+            params[ps[0]] = ps[1];
+        }
+        return params;
+    },
 }

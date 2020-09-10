@@ -3,7 +3,8 @@ import main from '@/resource/template/main'
 let menu = [];
 menu = menu.concat([
     {
-        path: '/home',
+        path: '/dashboard',
+        redirect: '/dashboard/home',
         meta: { auth: false },
         component:  main,
 
@@ -11,13 +12,9 @@ menu = menu.concat([
         ]
     },
     {
-        path: '/*',
-        name: '404',
-        meta: { auth: false },
-        component:  () => import(/* webpackChunkName: "pages/error/vue/error" */'@Pages/error/vue/error'),
-
-        children: [
-        ]
+        path: '*',
+        redirect: '/dashboard/home',
+        meta: { auth: false }
     }
 ]);
 export default menu;
