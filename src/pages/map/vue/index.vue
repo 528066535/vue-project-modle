@@ -6,12 +6,12 @@
                @moveend="syncCenterAndZoom"
                @zoomend="syncCenterAndZoom" :scroll-wheel-zoom="true" :center="center" :zoom="zoom" :map-click="false" class="bm-view">
       <bm-view class="map"></bm-view>
-      <bm-point-collection :points="placePoints" shape="BMAP_POINT_SHAPE_RHOMBUS" color="#09f" size="BMAP_POINT_SIZE_HUGE" @click="clickHandler">
+      <bm-point-collection :points="placeList" shape="BMAP_POINT_SHAPE_CIRCLE" color="#09f" size="BMAP_POINT_SIZE_BIG" @click="clickHandler">
       </bm-point-collection>
-      <bm-point-collection :points="placePoints1" shape="BMAP_POINT_SHAPE_RHOMBUS" color="red" size="BMAP_POINT_SIZE_HUGE" @click="clickHandler">
-      </bm-point-collection>
-      <bm-info-window :position="infoWindowPoint" title="地址" :show="show" @close="infoWindowClose" @open="infoWindowOpen">
-        <p>{{infoWindowPoint.address}}</p>
+      <bm-info-window :position="infoWindowPoint" title="" :show="show" @close="infoWindowClose" @open="infoWindowOpen">
+        <p>名称 : {{infoWindowPoint.pname}}</p>
+        <p>类型 : {{['服务点','学校','医院'][infoWindowPoint.type]}}</p>
+        <p>地址 : {{infoWindowPoint.addr}}</p>
       </bm-info-window>
     </baidu-map>
   </div>
@@ -23,6 +23,7 @@
    */
   import page from '@Pub/page';
   import validate from '@Pub/validate';
+  import http from '@Pub/http';
 
   export default {
     data() {
@@ -30,50 +31,7 @@
         BMap: null,
         center: {lng: 120, lat: 30.2},
         zoom: 12,
-        placeList1: [
-          {
-            "createtime": "20200604151736",
-            "adminname": "15658047571",
-            "pname": "睩客科技总部",
-            "wdu": "30.3",
-            "pid": 9,
-            "jdu": "119.2",
-            "type": 0,
-            "addr": "浙江省杭州市余杭区龙潭路龙潭路-天时科创园"
-          },
-          {
-            "createtime": "20200604151736",
-            "adminname": "15658047571",
-            "pname": "睩客科技总部1",
-            "wdu": "30.11",
-            "pid": 9,
-            "jdu": "119.9",
-            "type": 0,
-            "addr": "浙江省杭州市余杭区龙潭路龙潭路-天时科创园1"
-          }
-        ],
-        placeList: [
-          {
-            "createtime": "20200604151736",
-            "adminname": "15658047571",
-            "pname": "睩客科技总部",
-            "wdu": "30.282838",
-            "pid": 9,
-            "jdu": "119.989227",
-            "type": 0,
-            "addr": "浙江省杭州市余杭区龙潭路龙潭路-天时科创园"
-          },
-          {
-            "createtime": "20200604151736",
-            "adminname": "15658047571",
-            "pname": "睩客科技总部1",
-            "wdu": "30.1",
-            "pid": 9,
-            "jdu": "119.92",
-            "type": 0,
-            "addr": "浙江省杭州市余杭区龙潭路龙潭路-天时科创园1"
-          }
-        ],
+        placeList: [],
         infoWindowPoint: {
           address: ''
         },
@@ -81,16 +39,6 @@
       }
     },
     computed: {
-      placePoints1() {
-        return this.placeList1.map(data => {
-          return Object.assign(data, { lng: data.jdu, lat: data.wdu })
-        })
-      },
-      placePoints() {
-        return this.placeList.map(data => {
-          return Object.assign(data, { lng: data.jdu, lat: data.wdu })
-        })
-      }
     },
     mixins: [page],
     methods: {
@@ -103,7 +51,8 @@
       clickHandler(e) {
         e.point.address = '正在获取...'
         this.infoWindowPoint = e.point
-        this.getAddress(e)
+//        this.getAddress(e)
+        this.getListAddress(e)
         Vue.nextTick().then(()=>{
           this.show = true
         })
@@ -113,6 +62,13 @@
       },
       getClickInfo(e) {
         //
+      },
+      getListAddress(e) {
+        this.placeList.forEach(data => {
+          if(e.point.lng == data.lng && e.point.lat == data.lat) {
+            this.infoWindowPoint = data
+          }
+        })
       },
       getAddress(e) {
         // 此时已经可以获取到BMap类
@@ -125,7 +81,6 @@
           // getLocation() 类--利用坐标获取地址的详细信息
           // getPoint() 类--获取位置对应的坐标
           geoCoder.getLocation(e.point, function(res) {
-            console.log('获取经纬度', e.point, '获取详细地址', res)
             const addrComponent = res.addressComponents
             const surroundingPois = res.surroundingPois
             let addr = addrComponent.street
@@ -150,7 +105,12 @@
       }
     },
     mounted() {
-
+      http.post('/queryPointsAllApp',{pageNumber: 1, pageSize: 200}).then(res=>{
+        this.placeList = res.list.map(data => {
+          return Object.assign(data, { lng: data.jdu, lat: data.wdu })
+        })
+      }).catch(error=>{
+      })
     },
   };
 
