@@ -46,7 +46,7 @@
     <el-date-picker
             v-else-if="showPicker"
             :clearable="clearAble" :editable="false"
-            :picker-options="pickerOptions" size="small" :type="type" :placeholder="placeholder?placeholder:'选择日期'"
+            :picker-options="pickerStartOptions" size="small" :type="type" :placeholder="placeholder?placeholder:'选择日期'"
             :readonly="readonly"
             v-model="nativeValue"
             :disabled="disabled"

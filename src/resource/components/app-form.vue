@@ -10,7 +10,7 @@
         <div style="text-align: right;overflow: hidden;" v-if="$slots.after">
             <slot name="after"></slot>
         </div>
-        <div style="text-align: right;overflow: hidden;" v-else-if="!!$parent.dialog">
+        <div style="text-align: right;overflow: hidden;" v-else-if="!$parent.dialog">
             <app-button type="text" @click="close">关闭</app-button>
             <app-button v-if="!disabled" type="primary" size="big" :loading="$parent.posting" @click="save">保存</app-button>
         </div>

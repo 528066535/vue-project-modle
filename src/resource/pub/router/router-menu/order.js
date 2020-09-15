@@ -9,7 +9,7 @@ export default {
   router: [
     {
       path: 'order',
-      name: '订单',
+      name: '预约单',
       component: component.blank,
       redirect: '/dashboard/order/list',
       children: [

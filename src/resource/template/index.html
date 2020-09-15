@@ -11,6 +11,7 @@
     <!-- uc强制竖屏 -->
     <meta name="screen-orientation" content="portrait">
     <!-- QQ强制竖屏 -->
+    <link rel="shortcut icon" id="favicon" type="image/x-icon">
     <meta name="x5-orientation" content="portrait">
     <meta name="viewport" content="user-scalable=no">
     <meta name="viewport" content="initial-scale=1,maximum-scale=1">
@@ -19,6 +20,11 @@
 <body>
 <div id="body">
     <router-view></router-view>
+</div>
+<div class="dialog-detail" id="browser">
+    <app-dialog :class="style" :title="title" :width="width" ref="dialogDetail" @close="close"></app-dialog>
+    <app-dialog :title="subTitle" :width="subWidth" ref="dialogSubDetail" @close="closeSub"></app-dialog>
+    <iframe class="download-iframe" name="download" style="display: none;"></iframe>
 </div>
 </body>
 </html>

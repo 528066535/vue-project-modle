@@ -364,7 +364,7 @@
 
         &.selected{
             color: #fff;
-            background: #4D99F4;
+            /*background: #4D99F4;*/
             font-weight: normal;
         }
     }

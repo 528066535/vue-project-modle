@@ -1,3 +1,5 @@
+let timerGlobal = null;
+
 function getByKey(list, key, v) {
     return list.filter(function (value) {
         return value[key] === v;
@@ -297,7 +299,7 @@ function getType(obj) {
 export default {
     // 判断变量是否为Number对象
     isNumber(num) {
-        return this.getType(num) === '[object Number]';
+        return getType(num) === '[object Number]';
     },
 
     isInteger(num) {
@@ -306,31 +308,40 @@ export default {
 
     //判断是否对象
     isObject(num) {
-        return this.getType(num) === '[object Object]';
+        return getType(num) === '[object Object]';
     },
 
     // 判断变量是否为String对象
     isString(str) {
-        return this.getType(str) === '[object String]';
+        return getType(str) === '[object String]';
     },
 
     // 判断变量是否为Array对象
     isArray(arr) {
-        return this.getType(arr) === '[object Array]';
+        return getType(arr) === '[object Array]';
     },
 
     // 判断变量是否为Date对象
     isDate(date) {
-        return this.getType(date) === '[object Date]';
+        return getType(date) === '[object Date]';
     },
 
     // 判断变量是否为Function对象
     isFunction(fn) {
-        return this.getType(fn) === '[object Function]';
+        return getType(fn) === '[object Function]';
     },
 
     strLength(str){
         return str.replace(/[\u0391-\uFFE5]/g,"aa").length;
+    },
+
+    debounce(delay){
+        timerGlobal && clearTimeout(timerGlobal);
+        return new Promise((resolve, reject) => {
+            timerGlobal = setTimeout(() => {
+                resolve();
+            }, delay || 200);
+        });
     },
 
     // 创建一个指定长度且由字母和数字组成的随机字符串

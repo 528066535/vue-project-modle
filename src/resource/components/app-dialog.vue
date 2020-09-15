@@ -178,8 +178,9 @@
     .el-dialog__header .el-dialog__title,.el-message-box__header .el-message-box__title{
         font-weight:normal;
         color: #3b3b3b;
-        font-size: 14px;
-        line-height: 44px;
+        font-size: 18px;
+        line-height: 14px;
+        vertical-align: top;
     }
 
     .el-dialog__header,.el-message-box__header{
@@ -200,7 +201,7 @@
 
     //弹框body样式
     .el-dialog__body{
-        padding: 0;
+        padding: 0 !important;
         .box();
         .box-column();
 
@@ -212,6 +213,7 @@
             .dialog__body--inner{
                 .data-form{
                     padding: 16px 28px 16px 28px;
+                    overflow: hidden;
                 }
 
                .el-tree{

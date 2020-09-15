@@ -16,6 +16,7 @@
                   :select-on-indeterminate="true"
                   v-loading="loading"
                   :empty-text="emptyText"
+                  size="mini"
         >
             <el-table-column :selectable="canCheck" class-name="no-padding" v-if="multiSelect" type="selection" width="38"></el-table-column>
             <el-table-column v-if="!multiSelect && !noNumber" label="序号" type="index" width="38" align="center" class-name="no-padding"></el-table-column>

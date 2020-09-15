@@ -15,7 +15,6 @@ for (let i in routers) {
     homeRouters = routers[i];
     homeRouters.children = routerMenu.routers;
     for (let item in routerMenu.components) {
-      console.log(routerMenu.components)
       let route = {
         path: item,
         components: routerMenu.components[item],
@@ -39,5 +38,38 @@ export function createApp(mode) {
     store
   });
   createComponent(Vue)
+  window.dialogVm = new Vue({
+    el: '.dialog-detail',
+
+    data: {
+      width: '',
+      title: '',
+      style: '',
+
+      subWidth: '',
+      subTitle: ''
+    },
+
+    methods: {
+      close(){
+        this.width = '';
+        this.title = '';
+        this.style = '';
+      },
+
+      closeSub(){
+        this.subWidth = '';
+        this.subTitle = '';
+      }
+    },
+
+    mounted(){
+      $('.download-iframe').on('load', function () {
+        if($('.download-iframe')[0].contentDocument.location != 'about:blank'){
+          dialog.error('下载文件失败，请联系管理员!');
+        }
+      });
+    }
+  });
   return {app, router, store}
 }
