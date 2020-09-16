@@ -10,7 +10,14 @@
   </div>
 </template>
 <script>
-  import stack from 'vue-tantan-stack'
+  import stack from '@Pub/components/stack'
+  import img1 from '../img/1.png'
+  import img2 from '../img/2.png'
+  import img3 from '../img/3.png'
+  import img4 from '../img/4.png'
+  import img5 from '../img/5.png'
+  import img6 from '../img/6.png'
+  import img7 from '../img/7.png'
   export default {
     data () {
       return {
@@ -24,8 +31,13 @@
       let that = this
       setTimeout(function () {
         that.someList = [
-          { html: '<img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1906469856,4113625838&fm=26&gp=0.jpg" alt="01">' },
-          { html: '<img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2534506313,1688529724&fm=26&gp=0.jpg" alt="02">' }
+          { html: `<img src="${img1}" alt="01">` },
+          { html: `<img src="${img2}" alt="01">` },
+          { html: `<img src="${img3}" alt="01">` },
+          { html: `<img src="${img4}" alt="01">` },
+          { html: `<img src="${img5}" alt="01">` },
+          { html: `<img src="${img6}" alt="01">` },
+          { html: `<img src="${img7}" alt="01">` }
         ]
       }, 2000)
     },
