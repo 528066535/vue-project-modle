@@ -42,6 +42,18 @@ let removeToken = () => {
     remove(Config.DATA.TOKEN);
 };
 
+let getCount = () => {
+    return get(Config.DATA.COUNT);
+};
+
+let setCount = (item) => {
+    return set(Config.DATA.COUNT,item);
+};
+
+let removeCount = () => {
+    remove(Config.DATA.COUNT);
+};
+
 function getKey(code) {
     return Config.DATA.PREFIX + code;
 }
@@ -75,4 +87,7 @@ export default {
     getToken,
     setToken,
     removeToken,
+    getCount,
+    setCount,
+    removeCount
 }

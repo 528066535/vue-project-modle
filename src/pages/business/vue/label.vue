@@ -107,7 +107,7 @@
       },
       open(row = null) {
         console.log('123')
-        import(/* webpackChunkName: "pages/business/dialog/label-detail" */'../dialog/label-detail').then(component => {
+        import(/* webpackChunkName: "pages/business/dialog/label-detail" */'../dialog/business-detail').then(component => {
           Dialog.open(component, row, {
           title: row ? '编辑' : '新增',
           width: 600,

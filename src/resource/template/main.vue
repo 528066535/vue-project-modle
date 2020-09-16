@@ -15,13 +15,13 @@
           </el-menu>
         </div>
         <div class="right-holder">
-          <el-dropdown>
+          <el-dropdown @command="clickDrop">
             <span class="el-dropdown-link">
               姓名<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>设置用户</el-dropdown-item>
-              <el-dropdown-item>退出登录</el-dropdown-item>
+              <el-dropdown-item command="a">设置用户</el-dropdown-item>
+              <el-dropdown-item command="logout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
@@ -35,14 +35,19 @@
           text-color="#fff"
           @select="handleSelectSub"
         >
-          <el-menu-item v-for="item in subMenus.children" :index="item.path" :key="item.path">
+          <el-menu-item v-for="item in subMenus.children" :index="item.path" :key="item.path" v-if="!item.meta.isDetail">
             <i class="el-icon-menu"></i>
             <span slot="title">{{item.name}}</span>
           </el-menu-item>
         </el-menu>
       </div>
       <div class="main-content">
-        <router-view></router-view>
+        <div class="menu-back-holder" v-if="backObj.name && backObj.isDetail">
+          <a class="back-button" @click="back"><i class="icon el-icon-arrow-left"></i><span>{{backObj.name}}</span></a>
+        </div>
+        <div class="main-view">
+          <router-view></router-view>
+        </div>
       </div>
     </div>
   </div>
@@ -59,13 +64,19 @@
         currentUrl: '',
         activeIndex: '',
         subMenus: [],
-        activeSubIndex: ''
+        activeSubIndex: '',
+        backObj: {}
       }
     },
     computed: {
     },
     watch: {
       '$route'(to, from){
+        console.log(this.$route)
+        this.backObj = {
+          name: this.$route.query.fn,
+          isDetail: this.$route.meta.isDetail
+        }
         if(to.path === from.path){
           //同一个地址参数变化，刷新当前页isEvaluate面
           window.location.reload();
@@ -79,6 +90,10 @@
       }
     },
     mounted() {
+      this.backObj = {
+        name: this.$route.query.fn,
+        isDetail: this.$route.meta.isDetail
+      }
     },
     created() {
       this.currentUrl = router.url.split('?')[0].replace('/dashboard/', '/')
@@ -88,13 +103,21 @@
       this.activeSubIndex = this.currentUrl ? this.currentUrl.split('/')[2] : ''
     },
     methods: {
+      clickDrop(item) {
+        switch (item) {
+          case 'logout':
+            Util.clearToken()
+            this.$router.push('/login')
+            break
+        }
+      },
+      back() {
+        router.back()
+      },
       handleSelect(path) {
-        if (this.activeIndex == path) return
         router.go(`/dashboard/${path}`)
       },
       handleSelectSub(path) {
-        if (this.activeSubIndex == path) return
-        console.log(`/dashboard/${this.activeIndex}/${path}`)
         router.go(`/dashboard/${this.activeIndex}/${path}`)
       }
     }
@@ -188,26 +211,55 @@
         overflow: hidden;
         width: 0;
         flex: 1;
-      }
-
-      .main-content > div {
-        display: flex;
         flex-direction: column;
-        height: 100%;
-        width: 100%;
-        background: #f5f5f5;
 
-        .table-container{
-          overflow: hidden;
+        .main-view {
+          height: 100%;
+          width: 100%;
+        }
+
+        .main-view > div {
+          display: flex;
+          flex-direction: column;
           flex: 1;
-          padding-left: 10px;
+          height: 100%;
+          width: 100%;
+          background: #f5f5f5;
+
+          .table-container{
+            overflow: hidden;
+            flex: 1;
+            padding-left: 10px;
+          }
         }
       }
+
     }
 
     .el-dropdown-link {
       cursor: pointer;
       color: @color-link;
+    }
+
+    .menu-back-holder {
+      width: 100%;
+      height: 50px;
+      line-height: 50px;
+      position: relative;
+      z-index: 0;
+      background: white;
+      .back-button{
+        display: inline-block;
+        line-height: 50px;
+        vertical-align: top;
+        padding-left: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        color: #3b3b3b;
+        span {
+          margin-left: 2px;
+        }
+      }
     }
   }
 

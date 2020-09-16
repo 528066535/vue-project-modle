@@ -7,9 +7,9 @@
       <app-formitem>
         <app-button type="primary" size="mini" @click="search">搜索</app-button>
       </app-formitem>
-      <!--<div slot="toolbar">-->
-      <!--<app-button @click="add" icon="add">新增</app-button>-->
-      <!--</div>-->
+      <div slot="toolbar">
+        <app-button @click="add" icon="add">新增</app-button>
+      </div>
     </app-condition>
     <div class="table-container">
       <app-table ref="table" :paging="false" :local-data="tableData" :param="getParams()">
@@ -33,6 +33,7 @@
 <script>
   import Dialog from '@Pub/dialog';
   import Http from '@Pub/http';
+  import router from '@Pub/router';
 
   export default {
     data() {
@@ -172,7 +173,9 @@
       search(){
         this.$refs.table.reload();
       },
-      add() {},
+      add() {
+        router.go(`/dashboard/test/home/detail`)
+      },
       edit(row) {
         Dialog.confirm('重置密码后,默认密码为123456,是否需要重置密码？','提示').then(()=>{
           Http.post('/resetUserPwd', {loginname: row.loginname}).then(res=>{

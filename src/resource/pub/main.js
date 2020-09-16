@@ -14,19 +14,8 @@ for (let i in routers) {
   if (routers[i].path === '/dashboard') {
     homeRouters = routers[i];
     homeRouters.children = routerMenu.routers;
-    for (let item in routerMenu.components) {
-      let route = {
-        path: item,
-        components: routerMenu.components[item],
-        meta: {
-          auth: false
-        },
-      }
-      homeRouters.children.unshift(route)
-    }
   }
 }
-
 routers.concat(routerMenu.routers);
 
 export function createApp(mode) {

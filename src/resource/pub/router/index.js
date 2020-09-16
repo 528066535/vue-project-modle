@@ -62,7 +62,7 @@ export default {
           param.menu = currentParam.menu;
         }
 
-        if (name && param.id) {
+        if (name) {
           param.fn = name;
         }
 
@@ -82,6 +82,10 @@ export default {
 
   get url() {
     return location.hash.replace('#', '');
+  },
+
+  back(){
+    router && router.go(-1);
   },
 
   /**

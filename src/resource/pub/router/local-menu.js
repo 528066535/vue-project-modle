@@ -1,4 +1,5 @@
 import main from '@/resource/template/main'
+import login from '@Pages/login/vue/index'
 
 let menu = [];
 menu = menu.concat([
@@ -10,6 +11,11 @@ menu = menu.concat([
 
         children: [
         ]
+    },
+    {
+        path: '/login',
+        meta: { auth: false },
+        component:  login
     },
     {
         path: '*',

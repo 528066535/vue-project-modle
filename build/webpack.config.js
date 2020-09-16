@@ -42,6 +42,7 @@ module.exports = {
             template: './src/resource/template/index.html',
             inject: 'body',
             title: '测试',
+            favicon: path.resolve('background.png'),
             hash: false
         }),
         new ManifestPlugin({
