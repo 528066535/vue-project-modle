@@ -1,4 +1,5 @@
 import main from '@/resource/template/main'
+import relate from '@Pages/wx/vue/relate'
 
 let menu = [];
 menu = menu.concat([
@@ -8,6 +9,11 @@ menu = menu.concat([
     component: main,
 
     children: []
+  },
+  {
+    path: '/relate',
+    meta: {auth: false},
+    component: relate
   },
   {
     path: '*',

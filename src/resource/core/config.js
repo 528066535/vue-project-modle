@@ -11,5 +11,6 @@ let NORMAL = {
 
 export default {
     DATA,
-    NORMAL
+    NORMAL,
+    PROXY_URL: ''
 }

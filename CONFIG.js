@@ -1,5 +1,5 @@
 module.exports = {
-    API_URL: 'http://47.114.33.38/',
+    API_URL: '',
     PORT: 3002,
     DISPORT: 3004
 };
