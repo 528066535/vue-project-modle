@@ -12,7 +12,9 @@
         @mouseout.stop.capture.prevent="touchend"
         @webkit-transition-end="onTransitionEnd(index)"
         @transitionend="onTransitionEnd(index)">
-      <div v-html="item.html"></div>
+      <div class="item-holder">
+        <slot name="html" :item="item"></slot>
+      </div>
     </li>
   </ul>
 </template>

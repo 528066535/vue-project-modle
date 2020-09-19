@@ -11,7 +11,7 @@ Vue.use(Vant);
 
 let homeRouters = null;
 for(let i in routers) {
-    if(routers[i].path == '/home') {
+    if(routers[i].path == '/dashboard') {
         homeRouters = routers[i];
         homeRouters.children = routerMenu.routers;
     }

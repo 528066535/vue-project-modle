@@ -1,13 +1,11 @@
 const component = {
-    test: () => import(/* webpackChunkName: "pages/test/vue/test" */'@Pages/test/vue/test'),
+  test: () => import(/* webpackChunkName: "pages/test/vue/test" */'@Pages/test/vue/test'),
 };
 
 export default {
-    component: {
+  component: {},
 
-    },
-
-    router: [
-        { path: 'test/test', name: '测试界面', component: component.test },
-    ]
+  router: [
+    {path: 'test/test', name: '测试界面', component: component.test},
+  ]
 }

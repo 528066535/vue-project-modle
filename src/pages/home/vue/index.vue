@@ -1,7 +1,13 @@
 <template>
-  <div>
+  <div class="test-wrap">
     <div class="stack-wrapper">
-      <stack ref="stack" :pages="someList" :stackinit="stackinit"></stack>
+      <stack ref="stack" :pages="someList" :stackinit="stackinit">
+        <template slot="html" slot-scope="{item}">
+          <div v-html="item.html">
+            <!--{{item}}-->
+          </div>
+        </template>
+      </stack>
     </div>
     <div class="controls">
       <button @click="prev" class="button"><i class="prev"></i><span class="text-hidden">prev</span></button>
@@ -10,9 +16,15 @@
   </div>
 </template>
 <script>
-  import stack from '../components/stack'
+  import stack from '@Pub/components/stack/stack'
+  import img1 from '../img/1.png'
+  import img2 from '../img/2.png'
+  import img3 from '../img/3.png'
+  import img4 from '../img/4.png'
+  import img5 from '../img/5.png'
+  import img6 from '../img/6.png'
+  import img7 from '../img/7.png'
   export default {
-    el: '#stack',
     data () {
       return {
         someList: [],
@@ -25,27 +37,13 @@
       let that = this
       setTimeout(function () {
         that.someList = [
-          {
-            html: '<img src="img/1.png" alt="01">'
-          },
-          {
-            html: '<img src="img/2.png" alt="02">'
-          },
-          {
-            html: '<img src="img/3.png" alt="03">'
-          },
-          {
-            html: '<img src="img/4.png" alt="04">'
-          },
-          {
-            html: '<img src="img/5.png" alt="05">'
-          },
-          {
-            html: '<img src="img/6.png" alt="06">'
-          },
-          {
-            html: '<img src="img/7.png" alt="07">'
-          }
+          { html: `<img src="${img1}" alt="01">` },
+          { html: `<img src="${img2}" alt="01">` },
+          { html: `<img src="${img3}" alt="01">` },
+          { html: `<img src="${img4}" alt="01">` },
+          { html: `<img src="${img5}" alt="01">` },
+          { html: `<img src="${img6}" alt="01">` },
+          { html: `<img src="${img7}" alt="01">` }
         ]
       }, 2000)
     },
@@ -63,6 +61,9 @@
   }
 </script>
 <style>
+  .test-wrap {
+    height: 800px;
+  }
   .stack-wrapper{
     margin: 0 auto;
     position: relative;

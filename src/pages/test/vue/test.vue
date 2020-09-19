@@ -1,7 +1,13 @@
 <template>
-  <div>
+  <div class="test-wrap">
     <div class="stack-wrapper">
-      <stack ref="stack" :pages="someList" :stackinit="stackinit"></stack>
+      <stack ref="stack" :pages="someList" :stackinit="stackinit">
+        <template slot="html" slot-scope="{item}">
+          <div v-html="item.html">
+            <!--{{item}}-->
+          </div>
+        </template>
+      </stack>
     </div>
     <div class="controls">
       <button @click="prev" class="button"><i class="prev"></i><span class="text-hidden">prev</span></button>
@@ -10,7 +16,7 @@
   </div>
 </template>
 <script>
-  import stack from '@Pub/components/stack'
+  import stack from '@Pub/components/stack/stack'
   import img1 from '../img/1.png'
   import img2 from '../img/2.png'
   import img3 from '../img/3.png'
@@ -55,6 +61,9 @@
   }
 </script>
 <style>
+  .test-wrap {
+    height: 800px;
+  }
   .stack-wrapper{
     margin: 0 auto;
     position: relative;
