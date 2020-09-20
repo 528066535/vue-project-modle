@@ -9,9 +9,16 @@
       <bm-point-collection :points="placeList" shape="BMAP_POINT_SHAPE_CIRCLE" color="#09f" size="BMAP_POINT_SIZE_BIG" @click="clickHandler">
       </bm-point-collection>
       <bm-info-window :position="infoWindowPoint" title="" :show="show" @close="infoWindowClose" @open="infoWindowOpen">
-        <p>名称 : {{infoWindowPoint.pname}}</p>
-        <p>类型 : {{['服务点','学校','医院'][infoWindowPoint.type]}}</p>
-        <p>地址 : {{infoWindowPoint.addr}}</p>
+        <div>
+          <p>
+            <img class="img" :src="infoWindowPoint.pimg" alt="">
+          </p>
+          <p>名称 : {{infoWindowPoint.pname}}</p>
+          <p>类型 : {{['服务点','学校','医院'][infoWindowPoint.type]}}</p>
+          <p>地址 : {{infoWindowPoint.addr}}</p>
+
+        </div>
+
       </bm-info-window>
     </baidu-map>
   </div>
@@ -29,6 +36,7 @@
     data() {
       return {
         BMap: null,
+        map: null,
         center: {lng: 120, lat: 30.2},
         zoom: 12,
         placeList: [],
@@ -42,6 +50,10 @@
     },
     mixins: [page],
     methods: {
+      setSourceCenter() {
+        this.map.setCenter(this.center)
+        this.map.panTo(this.center)
+      },
       infoWindowClose () {
         this.show = false
       },
@@ -59,6 +71,18 @@
       },
       onBaiduMapReady(e) {
         this.BMap = e.BMap
+        this.map = e.map
+        let that = this
+        const geolocation = new this.BMap.Geolocation();
+        geolocation.getCurrentPosition(function(r){
+          console.log(r)
+          console.log(e)
+          that.center = {
+            lng: r.longitude,
+            lat: r.latitude
+          }
+          that.setSourceCenter()
+        },{ enableHighAccuracy: true })
       },
       getClickInfo(e) {
         //
@@ -123,5 +147,12 @@
     .map {
       height: 100%;
     }
+  }
+
+  .img {
+    max-width: 150px;
+    max-height: 100px;
+    top: 0;
+    right: 0;
   }
 </style>
