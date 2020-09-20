@@ -4,9 +4,11 @@
                @ready="onBaiduMapReady"
                @moving="syncCenterAndZoom"
                @moveend="syncCenterAndZoom"
-               @zoomend="syncCenterAndZoom" :scroll-wheel-zoom="true" :center="center" :zoom="zoom" :map-click="false" class="bm-view">
+               @zoomend="syncCenterAndZoom" :scroll-wheel-zoom="true" :center="center" :zoom="zoom" :map-click="false"
+               class="bm-view">
       <bm-view class="map"></bm-view>
-      <bm-point-collection :points="placeList" shape="BMAP_POINT_SHAPE_CIRCLE" color="#09f" size="BMAP_POINT_SIZE_BIG" @click="clickHandler">
+      <bm-point-collection :points="placeList" shape="BMAP_POINT_SHAPE_CIRCLE" color="#09f" size="BMAP_POINT_SIZE_BIG"
+                           @click="clickHandler">
       </bm-point-collection>
       <bm-info-window :position="infoWindowPoint" title="" :show="show" @close="infoWindowClose" @open="infoWindowOpen">
         <div>
@@ -46,18 +48,17 @@
         show: true
       }
     },
-    computed: {
-    },
+    computed: {},
     mixins: [page],
     methods: {
       setSourceCenter() {
         this.map.setCenter(this.center)
         this.map.panTo(this.center)
       },
-      infoWindowClose () {
+      infoWindowClose() {
         this.show = false
       },
-      infoWindowOpen () {
+      infoWindowOpen() {
         this.show = true
       },
       clickHandler(e) {
@@ -65,31 +66,49 @@
         this.infoWindowPoint = e.point
 //        this.getAddress(e)
         this.getListAddress(e)
-        Vue.nextTick().then(()=>{
+        Vue.nextTick().then(() => {
           this.show = true
         })
       },
       onBaiduMapReady(e) {
         this.BMap = e.BMap
         this.map = e.map
+        // let that = this
+        // const geolocation = new this.BMap.Geolocation();
+        // geolocation.getCurrentPosition(function(r){
+        //   console.log(r)
+        //   console.log(e)
+        //   that.center = {
+        //     lng: r.longitude,
+        //     lat: r.latitude
+        //   }
+        //   that.setSourceCenter()
+        // },{ enableHighAccuracy: true })
+        this.getCurrenPosition()
+      },
+      getCurrenPosition() {
         let that = this
-        const geolocation = new this.BMap.Geolocation();
-        geolocation.getCurrentPosition(function(r){
-          console.log(r)
-          console.log(e)
+        navigator.geolocation.getCurrentPosition(function (position) {
+          //得到html5定位结果
+          let x = position.coords.longitude;
+          let y = position.coords.latitude;
+
           that.center = {
-            lng: r.longitude,
-            lat: r.latitude
+            lng: x,
+            lat: y
           }
+
           that.setSourceCenter()
-        },{ enableHighAccuracy: true })
+        }, err => {
+          debugger
+        })
       },
       getClickInfo(e) {
         //
       },
       getListAddress(e) {
         this.placeList.forEach(data => {
-          if(e.point.lng == data.lng && e.point.lat == data.lat) {
+          if (e.point.lng == data.lng && e.point.lat == data.lat) {
             this.infoWindowPoint = data
           }
         })
@@ -104,7 +123,7 @@
           const geoCoder = new this.BMap.Geocoder()
           // getLocation() 类--利用坐标获取地址的详细信息
           // getPoint() 类--获取位置对应的坐标
-          geoCoder.getLocation(e.point, function(res) {
+          geoCoder.getLocation(e.point, function (res) {
             const addrComponent = res.addressComponents
             const surroundingPois = res.surroundingPois
             let addr = addrComponent.street
@@ -126,17 +145,30 @@
         // this.center.lng = lng
         // this.center.lat = lat
         this.zoom = e.target.getZoom()
+      },
+      getPlaceList() {
+        http.post('/queryPointsAllApp', {pageNumber: 1, pageSize: 200}).then(res => {
+          // if (res.list.length > 0) {
+          //   this.center = {
+          //     lng: res.list[0].jdu,
+          //     lat: res.list[0].wdu
+          //   }
+          // }
+          // this.setSourceCenter()
+          this.placeList = res.list.map(data => {
+            return Object.assign(data, {lng: data.jdu, lat: data.wdu})
+          })
+        }).catch(error => {
+        })
+      },
+      getLocation(successFunc, errorFunc) { //successFunc获取定位成功回调函数，errorFunc获取定位失败回调
+
       }
     },
     mounted() {
-      http.post('/queryPointsAllApp',{pageNumber: 1, pageSize: 200}).then(res=>{
-        this.placeList = res.list.map(data => {
-          return Object.assign(data, { lng: data.jdu, lat: data.wdu })
-        })
-      }).catch(error=>{
-      })
+      this.getPlaceList()
     },
-  };
+  }
 
 </script>
 <style lang="less" scoped rel="stylesheet/less">
