@@ -2,6 +2,7 @@
 node_modules
 
 /dist
+*.zip
 
 npm-debug.log*
 yarn-debug.log*

@@ -42,7 +42,7 @@ export default {
         router = new VueRouter({mode: mode,routes: routers});
 
         router.beforeEach((to, from, next) => {
-            if(!Data.getToken() && to.path != '/login' && to.path != '/index') {
+            if(!Data.getToken() && to.path != '/login' && to.path != '/index' && to.path != '/map') {
                 document.location.href = '/#/login'
                 next({path: '/login'});
             }
