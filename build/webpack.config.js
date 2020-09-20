@@ -41,7 +41,7 @@ module.exports = {
             chunks: ["vendor","index","commons","css"],
             template: './src/resource/template/index.html',
             inject: 'body',
-            title: '新草',
+            title: '睩客',
             hash: false
         }),
         // new HtmlWebpackPlugin({
