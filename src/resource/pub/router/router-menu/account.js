@@ -1,6 +1,7 @@
 const component = {
     blank: () => import(/* webpackChunkName: "template/blank" */'@/resource/template/blank'),
     appUser: () => import(/* webpackChunkName: "template/blank" */'@Pages/account/vue/app-user'),
+    activeUser: () => import(/* webpackChunkName: "template/blank" */'@Pages/account/vue/active-user'),
     bussiness: () => import(/* webpackChunkName: "pages/test/vue/test" */'@Pages/account/vue/bussiness'),
     device: () => import(/* webpackChunkName: "pages/test/vue/test" */'@Pages/account/vue/device'),
     place: () => import(/* webpackChunkName: "pages/test/vue/test" */'@Pages/account/vue/place'),
@@ -21,6 +22,14 @@ export default {
                     name: 'app用户',
                     path: 'user',
                     component: component.appUser,
+                    meta: {
+                        level: '1'
+                    },
+                },
+                {
+                    name: '活跃用户',
+                    path: 'active-user',
+                    component: component.activeUser,
                     meta: {
                         level: '1'
                     },
