@@ -49,14 +49,25 @@
             },
             save() {
                 this.$refs.form.verify(() => {
+                    const loading = this.$loading({
+                        lock: true,
+                        text: '正在导出',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
                     http.post(`/addDevices`, this.postData).then(res=>{
                         http.get(`/qrZipCreate?adminname=${Data.getUser()}&idmin=${res.startid}&idmax=${res.endid}`).then(res=>{
+                            loading.close();
                             window.open(res.zipurl)
                             if(this.parent && this.parent.$refs && this.parent.$refs.table){
                                 this.parent.$refs.table.refresh();
                             }
                             dialog.close()
+                        }).catch(error=>{
+                            loading.close();
                         })
+                    }).catch(error=>{
+                        loading.close();
                     })
                 })
             }

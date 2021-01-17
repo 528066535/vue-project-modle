@@ -33,8 +33,17 @@
         methods: {
             save() {
                 this.$refs.form.verify(() => {
+                    const loading = this.$loading({
+                        lock: true,
+                        text: '正在导出',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
                     http.get(`/qrZipCreate?adminname=${Data.getUser()}&idmin=${this.postData.idmin}&idmax=${this.postData.idmax}`).then(res=>{
                         window.open(res.zipurl)
+                        loading.close();
+                    }).catch(error=> {
+                        loading.close();
                     })
                 })
             }
