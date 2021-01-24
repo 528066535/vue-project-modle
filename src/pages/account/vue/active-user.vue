@@ -33,15 +33,17 @@
 
 <script>
     import Dialog from '@Pub/dialog';
+    import Data from '@Core/data';
     import Http from '@Pub/http';
     import filter from '@Pub/filter';
 
     export default {
         data() {
+            let star = new Date((new Date()).setMonth((new Date()).getMonth()-1))
             return {
                 conditions: {
                     queryname: '',
-                    time: []
+                    time: [star, new Date()]
                 }
             }
         },
@@ -65,7 +67,8 @@
                     spinner: 'el-icon-loading',
                     background: 'rgba(0, 0, 0, 0.7)'
                 })
-                Http.get(`/exportActiveList?adminname=${Data.getUser()}`).then(res=>{
+                let query = `adminname=${Data.getUser()}&startDay=${this.conditions.time[0] ? filter.date(this.conditions.time[0], 'yyyyMMdd') : ''}&endDay=${this.conditions.time[1] ? filter.date(this.conditions.time[1], 'yyyyMMdd') : ''}`
+                Http.get(`/exportActiveList?${query}`).then(res=>{
                     loading.close();
                     window.open(res.zipurl)
                 }).catch(error=>{
