@@ -77,6 +77,7 @@ function ajax(url, data={}, method, silent){
         data: param,
         type: method,
         headers: headers,
+        timeout: 600000,
         complete: function (XHR, TS) {
             XHR = null
         },

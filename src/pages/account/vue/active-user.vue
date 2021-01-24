@@ -5,7 +5,7 @@
                 <app-input @keyup="search" v-model="conditions.queryname"></app-input>
             </app-formitem>
             <app-formitem label="时间">
-                <app-input type="daterange" @keyup="search" v-model="conditions.time"></app-input>
+                <app-input :clear-able="false" type="daterange" @keyup="search" v-model="conditions.time"></app-input>
             </app-formitem>
             <app-formitem>
                 <app-button type="primary" @click="search">搜索</app-button>
