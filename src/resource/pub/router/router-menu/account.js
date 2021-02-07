@@ -23,7 +23,7 @@ export default {
                     path: 'user',
                     component: component.appUser,
                     meta: {
-                        level: '1'
+                        level: '1,2'
                     },
                 },
                 {
@@ -31,7 +31,7 @@ export default {
                     path: 'active-user',
                     component: component.activeUser,
                     meta: {
-                        level: '1'
+                        level: '1,2'
                     },
                 },
                 {

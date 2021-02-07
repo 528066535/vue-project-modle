@@ -69,8 +69,10 @@
                 })
                 let query = `adminname=${Data.getUser()}&startDay=${this.conditions.time[0] ? filter.date(this.conditions.time[0], 'yyyyMMdd') : ''}&endDay=${this.conditions.time[1] ? filter.date(this.conditions.time[1], 'yyyyMMdd') : ''}`
                 Http.get(`/exportActiveList?${query}`).then(res=>{
-                    loading.close();
+                    console.log('要下载了')
+                    console.log(res)
                     window.open(res.zipurl)
+                    loading.close();
                 }).catch(error=>{
                     loading.close();
                 })

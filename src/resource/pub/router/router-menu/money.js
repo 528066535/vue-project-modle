@@ -13,7 +13,7 @@ export default {
             path: 'money',
             name: '充值记录',
             meta: {
-                level: '1'
+                level: '1,2'
             },
             component: component.money }
     ]
