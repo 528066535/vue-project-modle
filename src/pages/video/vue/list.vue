@@ -63,12 +63,14 @@
                     </template>
                 </el-table-column>
                 <el-table-column label="总集数" prop="totalnum" align="center"></el-table-column>
+                <el-table-column label="播放次数" prop="playtimes" align="center"></el-table-column>
                 <el-table-column label="当前是第几集" prop="ordernum" align="center"></el-table-column>
                 <el-table-column label="创建者" prop="adminname" align="center"></el-table-column>
-                <el-table-column  label="操作" align="center" :width="conditions.status === '/queryDropVideos'?320:250">
+                <el-table-column  label="操作" align="center" :width="conditions.status === '/queryDropVideos'?400:330">
                     <template slot-scope="scope">
                         <app-button icon="edit" size="mini" @click="add(scope.row)">新增</app-button>
                         <app-button icon="edit" size="mini" @click="edit(scope.row)">编辑</app-button>
+                        <app-button icon="edit" size="mini" @click="editTime(scope.row)">播放次数</app-button>
                         <app-button v-if="conditions.status === '/queryVideos'" icon="edit" size="mini" @click="down(scope.row)">下架</app-button>
                         <app-button v-else icon="edit" size="mini" @click="up(scope.row)">上架</app-button>
                         <app-button v-if="conditions.status === '/queryDropVideos'" icon="edit" size="mini" @click="delRow(scope.row)">删除</app-button>
@@ -114,6 +116,15 @@
                 import(/* webpackChunkName: "pages/video/video" */'../dialog/video').then(component => {
                     Dialog.open(component, row, {
                         title: row.vid ? '编辑一级视频' : '新增一级视频',
+                        width: 500,
+                        parent: this
+                    });
+                });
+            },
+            editTime(row) {
+                import(/* webpackChunkName: "pages/video/video-time" */'../dialog/video-time').then(component => {
+                    Dialog.open(component, row, {
+                        title: '编辑播放次数',
                         width: 500,
                         parent: this
                     });

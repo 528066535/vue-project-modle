@@ -1,4 +1,4 @@
-<template>
+ v<template>
     <div>
         <app-condition>
             <app-formitem label="账号">
@@ -22,7 +22,7 @@
                 <el-table-column label="vip到期日期" prop="vipexpdate" align="center"></el-table-column>
                 <el-table-column  label="操作" align="center" width="250px">
                     <template slot-scope="scope">
-                        <app-button icon="edit" size="mini" @click="setTime(scope.row)">设置有效期</app-button>
+                        <app-button v-if="isOne" icon="edit" size="mini" @click="setTime(scope.row)">设置有效期</app-button>
                         <app-button icon="edit" size="mini" @click="edit(scope.row)">重置密码</app-button>
                     </template>
                 </el-table-column>
@@ -34,6 +34,7 @@
 <script>
     import Dialog from '@Pub/dialog';
     import Http from '@Pub/http';
+    import page from '@Pub/page';
 
     export default {
         data() {
@@ -58,6 +59,7 @@
 
         mounted() {
         },
+        mixins: [page],
 
         methods:{
             getParams() {

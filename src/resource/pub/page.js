@@ -5,14 +5,20 @@
 import util from '@Pub/util';
 import http from '@Pub/http';
 import dialog from '@Pub/dialog';
+import Data from '@Core/data';
 
 export default {
     computed: {
-
+        isOne() {
+            return this.carrierlv == 1
+        },
+        isTwo() {
+            return this.carrierlv == 2
+        },
     },
     data(){
         return {
-
+            carrierlv: Data.getLevel()
         };
     },
 
