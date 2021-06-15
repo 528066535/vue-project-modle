@@ -65,7 +65,7 @@
                     spinner: 'el-icon-loading',
                     background: 'rgba(0, 0, 0, 0.7)'
                 })
-                let query = `loginname=${router.param.loginname}&startDay=${this.conditions.time[0] ? filter.date(this.conditions.time[0], 'yyyyMMdd') : ''}&endDay=${this.conditions.time[1] ? filter.date(this.conditions.time[1], 'yyyyMMdd') : ''}`
+                let query = `loginname=${router.param.loginname}&startday=${this.conditions.time[0] ? filter.date(this.conditions.time[0], 'yyyyMMdd') : ''}&endday=${this.conditions.time[1] ? filter.date(this.conditions.time[1], 'yyyyMMdd') : ''}`
                 Http.get(`/exportHostoryPlayList?${query}`).then(res=>{
                     console.log('要下载了')
                     console.log(res)
@@ -81,8 +81,8 @@
             getParams() {
                 return {
                     loginname: router.param.loginname,
-                    startDay: this.conditions.time[0] ? filter.date(this.conditions.time[0], 'yyyyMMdd') : '',
-                    endDay: this.conditions.time[1] ? filter.date(this.conditions.time[1], 'yyyyMMdd') : ''
+                    startday: this.conditions.time[0] ? filter.date(this.conditions.time[0], 'yyyyMMdd') : '',
+                    endday: this.conditions.time[1] ? filter.date(this.conditions.time[1], 'yyyyMMdd') : ''
                 }
             },
             search(){

@@ -45,16 +45,21 @@
         methods: {
             exportFile() {
                 let selections = this.$refs.table.getSelection()
-                if(!selections.length) {
-                    return Dialog.error('请选择要导出的数据')
-                }
+                // if(!selections.length) {
+                //     return Dialog.error('请选择要导出的数据')
+                // }
                 const loading = this.$loading({
                     lock: true,
                     text: '正在导出',
                     spinner: 'el-icon-loading',
                     background: 'rgba(0, 0, 0, 0.7)'
                 })
-                let query = `loginnames=${selections.map(data => data.loginname).join(',')}`
+                let query = ''
+                if(selections.length) {
+                    query  = `type=1&loginnames=${selections.map(data => data.loginname).join(',')}`
+                } else {
+                    query = `type=0`
+                }
                 Http.get(`/exportTotalPlayList?${query}`).then(res=>{
                     console.log('要下载了')
                     console.log(res)
