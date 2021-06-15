@@ -2,9 +2,11 @@ const component = {
     blank: () => import(/* webpackChunkName: "template/blank" */'@/resource/template/blank'),
     appUser: () => import(/* webpackChunkName: "template/blank" */'@Pages/account/vue/app-user'),
     activeUser: () => import(/* webpackChunkName: "template/blank" */'@Pages/account/vue/active-user'),
-    bussiness: () => import(/* webpackChunkName: "pages/test/vue/test" */'@Pages/account/vue/bussiness'),
-    device: () => import(/* webpackChunkName: "pages/test/vue/test" */'@Pages/account/vue/device'),
-    place: () => import(/* webpackChunkName: "pages/test/vue/test" */'@Pages/account/vue/place'),
+    bussiness: () => import(/* webpackChunkName: "pages/account/vue/test" */'@Pages/account/vue/bussiness'),
+    device: () => import(/* webpackChunkName: "pages/account/vue/test" */'@Pages/account/vue/device'),
+    place: () => import(/* webpackChunkName: "pages/account/vue/test" */'@Pages/account/vue/place'),
+    play: () => import(/* webpackChunkName: "pages/account/vue/play" */'@Pages/account/vue/play'),
+    playDetail: () => import(/* webpackChunkName: "pages/account/vue/play-detail" */'@Pages/account/vue/play-detail'),
 };
 
 export default {
@@ -32,6 +34,22 @@ export default {
                     component: component.activeUser,
                     meta: {
                         level: '1,2'
+                    },
+                },
+                {
+                    name: '播放时长',
+                    path: 'play',
+                    component: component.play,
+                    meta: {
+                        level: '1,2'
+                    },
+                },
+                {
+                    name: '播放时长详情',
+                    path: 'play-detail',
+                    component: component.playDetail,
+                    meta: {
+                        level: '0'
                     },
                 },
                 {
