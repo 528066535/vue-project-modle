@@ -19,7 +19,7 @@
             </div>
         </app-condition>
         <div class="table-container">
-            <app-table ref="table" url="/queryHostoryPlayList" :param="getParams">
+            <app-table ref="table" url="/queryHostoryPlayList" :param="getParams()">
                 <el-table-column  show-overflow-tooltip label="用户" prop="loginname" align="center"></el-table-column>
                 <el-table-column  show-overflow-tooltip label="播放时长" prop="playtimes" align="center"></el-table-column>
                 <el-table-column  show-overflow-tooltip label="播放日期" prop="serverdate" align="center"></el-table-column>
@@ -65,7 +65,7 @@
                     spinner: 'el-icon-loading',
                     background: 'rgba(0, 0, 0, 0.7)'
                 })
-                let query = `loginname=${router.param.loginname}&startday=${this.conditions.time[0] ? filter.date(this.conditions.time[0], 'yyyyMMdd') : ''}&endday=${this.conditions.time[1] ? filter.date(this.conditions.time[1], 'yyyyMMdd') : ''}`
+                let query = `loginname=${router.param.loginname}&startDay=${this.conditions.time[0] ? filter.date(this.conditions.time[0], 'yyyyMMdd') : ''}&endDay=${this.conditions.time[1] ? filter.date(this.conditions.time[1], 'yyyyMMdd') : ''}`
                 Http.get(`/exportHostoryPlayList?${query}`).then(res=>{
                     console.log('要下载了')
                     console.log(res)
@@ -81,8 +81,8 @@
             getParams() {
                 return {
                     loginname: router.param.loginname,
-                    startday: this.conditions.time[0] ? filter.date(this.conditions.time[0], 'yyyyMMdd') : '',
-                    endday: this.conditions.time[1] ? filter.date(this.conditions.time[1], 'yyyyMMdd') : ''
+                    startDay: this.conditions.time[0] ? filter.date(this.conditions.time[0], 'yyyyMMdd') : '',
+                    endDay: this.conditions.time[1] ? filter.date(this.conditions.time[1], 'yyyyMMdd') : ''
                 }
             },
             search(){
